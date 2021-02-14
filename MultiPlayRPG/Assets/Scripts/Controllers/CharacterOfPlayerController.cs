@@ -21,6 +21,11 @@ namespace MultiPlayRPG
         {
             _camera = Camera.main;
             _motor = GetComponent<UnitMotor>();
+            CameraController cameraController = _camera.GetComponent<CameraController>();
+            if (cameraController)
+            {
+                cameraController.Target = transform;
+            }
         }
 
         private void Update()
