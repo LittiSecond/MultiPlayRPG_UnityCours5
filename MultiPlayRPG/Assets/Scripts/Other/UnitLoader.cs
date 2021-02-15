@@ -16,7 +16,7 @@ namespace MultiPlayRPG
 
         public override void OnStartServer()
         {
-            GameObject unit = Instantiate(_unitPrefab);
+            GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
             NetworkServer.SpawnWithClientAuthority(unit, gameObject);
         }
 
