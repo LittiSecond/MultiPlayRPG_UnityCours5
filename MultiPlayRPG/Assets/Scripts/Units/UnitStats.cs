@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
-    public sealed class UnitStats : NetworkBehaviour, IHealth, ITakerDamag
+    public class UnitStats : NetworkBehaviour, IHealth, ITakerDamag
     {
         #region Fields
 
