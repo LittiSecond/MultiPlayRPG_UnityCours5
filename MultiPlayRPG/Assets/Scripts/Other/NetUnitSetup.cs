@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
-    public sealed class NetPlayerSetup : NetworkBehaviour
+    public sealed class NetUnitSetup : NetworkBehaviour
     {
         #region Fields
 

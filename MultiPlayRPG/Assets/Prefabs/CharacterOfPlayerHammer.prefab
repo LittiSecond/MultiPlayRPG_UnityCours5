@@ -2150,9 +2150,9 @@ GameObject:
   - component: {fileID: 4721903721185874444}
   - component: {fileID: 8251842341188826036}
   - component: {fileID: 3995891084860560347}
-  - component: {fileID: 8251842341188825995}
+  - component: {fileID: 8315364175649500627}
   - component: {fileID: 6891130415430224167}
-  - component: {fileID: 8016547294517106089}
+  - component: {fileID: 290569913625405369}
   - component: {fileID: 5898334578504255807}
   m_Layer: 10
   m_Name: CharacterOfPlayerHammer
@@ -2323,7 +2323,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
---- !u!114 &8251842341188825995
+--- !u!114 &8315364175649500627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2349,8 +2349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disableBehaviours:
   - {fileID: 8251842341188826036}
-  - {fileID: 8251842341188825995}
---- !u!114 &8016547294517106089
+  - {fileID: 8315364175649500627}
+--- !u!114 &290569913625405369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2359,10 +2359,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8251842341188825993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbed487b0c4aef4b86c15d08389e139, type: 3}
+  m_Script: {fileID: 11500000, guid: f777ba014c3fa454cb691dc658960e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
+  Damag:
+    _baseValue: 31
+  _maxHealth: 127
 --- !u!114 &5898334578504255807
 MonoBehaviour:
   m_ObjectHideFlags: 0

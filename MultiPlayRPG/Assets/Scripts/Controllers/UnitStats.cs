@@ -7,6 +7,8 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        public Stat Damag;
+
         [SerializeField] private int _maxHealth;
         [SyncVar] private int _currentHealth;
 
@@ -15,9 +17,19 @@ namespace MultiPlayRPG
 
         #region UnityMethods
 
-        public override void OnStartAuthority()
+        public override void OnStartServer()
         {
             _currentHealth = _maxHealth;
+        }
+
+        #endregion
+
+
+        #region Methods
+
+        public void SetHealthRate(float rate)
+        {
+            _currentHealth = rate == 0.0f ? 0 : (int)(_maxHealth / rate);
         }
 
         #endregion
