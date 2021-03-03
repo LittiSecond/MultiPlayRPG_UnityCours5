@@ -7,10 +7,10 @@ namespace MultiPlayRPG
     {
         #region Fields
 
-        public Transform _interactionTransform;
-        public float _radius = 2.0f;
+        public Transform InteractionTransform;
+        public float Radius = 2.0f;
 
-        private bool _hasInteract = true;
+        protected bool _hasInteract = true;
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace MultiPlayRPG
         protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(_interactionTransform.position, _radius);
+            Gizmos.DrawWireSphere(InteractionTransform.position, Radius);
         }
 
 

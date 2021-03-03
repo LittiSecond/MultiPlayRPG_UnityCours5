@@ -5669,8 +5669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388497187bf11684cb1cd247541db6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionTransform: {fileID: 1298906269}
-  _radius: 1.5
+  InteractionTransform: {fileID: 0}
+  Radius: 2
 --- !u!114 &1298906272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5967,7 +5967,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1324375471
 GameObject:
@@ -7834,7 +7834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: 103289a2a7cde3d43b274bbd5603e4d4, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4885079432260988, guid: 103289a2a7cde3d43b274bbd5603e4d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

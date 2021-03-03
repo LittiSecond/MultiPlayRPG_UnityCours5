@@ -3,13 +3,14 @@ using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
-    public class Unit : NetworkBehaviour
+    public class Unit : Interactable
     {
         #region Fields
 
         [SerializeField] protected UnitMotor _motor;
         [SerializeField] protected UnitStats _stats;
 
+        protected Interactable _focus;
         protected bool _isAlive = true;
 
         #endregion
@@ -61,8 +62,11 @@ namespace MultiPlayRPG
             _isAlive = false;
             if (isServer)
             {
+                _hasInteract = false;
                 _motor.MoveToPoint(transform.position);
                 RpcDie();
+
+                RemoveFocus();
             }
         }
 
@@ -71,6 +75,7 @@ namespace MultiPlayRPG
             _isAlive = true;
             if (isServer)
             {
+                _hasInteract = true;
                 _stats.SetHealthRate(1);
                 RpcRevive();
             }
@@ -96,6 +101,29 @@ namespace MultiPlayRPG
                     OnDeadUpdate();
                 }
             }
+        }
+
+        protected virtual void SetFocus( Interactable newFocus )
+        {
+            if (newFocus != _focus)
+            {
+                _focus = newFocus;
+                _motor.FollowTarget(newFocus);
+            }
+        }
+
+        protected virtual void RemoveFocus()
+        {
+            _focus = null;
+            _motor.StopFollowingTarget();
+        }
+
+        public override bool Interact(GameObject luser)
+        {
+            //return base.Interact(luser);
+            Debug.Log("Unit::Interact: " + gameObject.name + " interact with " +
+                luser.name);
+            return true;
         }
 
         #endregion
