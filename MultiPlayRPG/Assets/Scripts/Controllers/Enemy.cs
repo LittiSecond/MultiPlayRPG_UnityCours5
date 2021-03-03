@@ -19,6 +19,8 @@ namespace MultiPlayRPG
         [SerializeField] private float _revievDelay = 5.0f;
         [SerializeField] private bool _aggressive;
 
+        private CombatSystem _combatSystem;
+
         private Vector3 _startPosition;
         private Vector3 _curDistanation;
 
@@ -33,6 +35,7 @@ namespace MultiPlayRPG
 
         private void Start()
         {
+            _combatSystem = GetComponent<CombatSystem>();
             _startPosition = transform.position;
             _changePosTime = UnityEngine.Random.Range(_minMovementDelay, _maxMovementDelay);
             _revievTime = _revievDelay;
@@ -84,7 +87,12 @@ namespace MultiPlayRPG
                 }
                 else if (distance < _focus.Radius)
                 {
-                    _focus.Interact(gameObject);
+                    //_focus.Interact(gameObject);
+                    ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                    if (takerDamag != null)
+                    {
+                        _combatSystem.Attack(takerDamag);
+                    }
                 }
             }
 

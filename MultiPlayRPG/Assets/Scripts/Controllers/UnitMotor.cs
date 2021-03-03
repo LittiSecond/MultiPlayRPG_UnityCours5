@@ -48,9 +48,12 @@ namespace MultiPlayRPG
 
         public void FollowTarget(Interactable newTarget)
         {
-            _agent.stoppingDistance = newTarget.Radius;
-            _taget = newTarget.InteractionTransform;
-            _haveTarget = _taget != null;
+            if (newTarget != null)
+            {
+                _agent.stoppingDistance = newTarget.Radius;
+                _taget = newTarget.InteractionTransform;
+                _haveTarget = true;
+            }
         }
 
         public void StopFollowingTarget()

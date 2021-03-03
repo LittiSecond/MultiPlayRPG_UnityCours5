@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 
 namespace MultiPlayRPG
@@ -11,6 +10,7 @@ namespace MultiPlayRPG
         [SerializeField] GameObject _gfx;
         [SerializeField] private float _revievDelay = 5.0f;
 
+        private CombatSystem _combatSystem;
         private Vector3 _startPosition;
         private float _revievTime;
 
@@ -21,6 +21,7 @@ namespace MultiPlayRPG
 
         private void Start()
         {
+            _combatSystem = GetComponent<CombatSystem>();
             _startPosition = transform.position;
             _revievTime = _revievDelay;
         }
@@ -50,7 +51,12 @@ namespace MultiPlayRPG
                         _focus.InteractionTransform.position, transform.position);
                     if (distance <= _focus.Radius)
                     {
-                        _focus.Interact(gameObject);
+                        //_focus.Interact(gameObject);
+                        ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                        if (takerDamag != null)
+                        {
+                            _combatSystem.Attack(takerDamag);
+                        }
                     }
                 }
             }

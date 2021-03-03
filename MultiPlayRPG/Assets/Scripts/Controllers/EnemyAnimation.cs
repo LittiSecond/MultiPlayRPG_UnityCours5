@@ -8,6 +8,8 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        private const float NOT_MOVE_THRESHOLD = 0.01f;
+
         [SerializeField] private Animator _animator;
         [SerializeField] private NavMeshAgent _agent;
 
@@ -18,7 +20,7 @@ namespace MultiPlayRPG
 
         private void FixedUpdate()
         {
-            if (!_agent.hasPath)
+            if (_agent.velocity.magnitude < NOT_MOVE_THRESHOLD)
             {
                 _animator.SetBool("Move", false);
             }

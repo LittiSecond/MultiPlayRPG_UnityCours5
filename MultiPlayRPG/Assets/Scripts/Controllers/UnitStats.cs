@@ -51,10 +51,39 @@ namespace MultiPlayRPG
                 return;
             }
 
+            if (amount < 0)
+            {
+                return;
+            }
+
             _currentHealth -= amount;
             if (_currentHealth < 0)
             {
                 _currentHealth = 0;
+            }
+        }
+        
+        public void TakeHealing(int amount)
+        {
+            if (!isServer)
+            {
+                return;
+            }
+
+            if (_currentHealth <= 0.0f)
+            {
+                return;
+            }
+
+            if (amount < 0)
+            {
+                return;
+            }
+
+            _currentHealth += amount;
+            if (_currentHealth >= _maxHealth)
+            {
+                _currentHealth = _maxHealth;
             }
         }
 
