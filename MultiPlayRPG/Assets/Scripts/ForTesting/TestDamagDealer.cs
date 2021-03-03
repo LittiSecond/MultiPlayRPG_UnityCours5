@@ -30,7 +30,7 @@ namespace MultiPlayRPG
         {
             if (Input.GetKeyDown(KeyCode.M) )
             {
-                Debug.Log("TestDamagDealer->Update:");
+                //Debug.Log("TestDamagDealer->Update:");
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
