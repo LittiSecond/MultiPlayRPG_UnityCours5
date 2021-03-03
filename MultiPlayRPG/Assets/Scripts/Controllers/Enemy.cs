@@ -24,6 +24,7 @@ namespace MultiPlayRPG
 
         private float _changePosTime;
         private float _revievTime;
+        private LayerMask _playerMask;
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace MultiPlayRPG
             _startPosition = transform.position;
             _changePosTime = UnityEngine.Random.Range(_minMovementDelay, _maxMovementDelay);
             _revievTime = _revievDelay;
+            _playerMask = LayerManager.GetLayerMask(Layers.PlayersCharacters);
         }
 
         private void Update()
@@ -94,6 +96,7 @@ namespace MultiPlayRPG
                 _motor.MoveToPoint(_startPosition);
             }
         }
+
 
 
         #endregion

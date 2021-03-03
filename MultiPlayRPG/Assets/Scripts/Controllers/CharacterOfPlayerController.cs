@@ -8,7 +8,7 @@ namespace MultiPlayRPG
     {
         #region Fields
 
-       [SerializeField] private LayerMask _movementMask = 0x0200;
+       [SerializeField] private LayerMask _movementMask;
 
         private CharacterOfPlr _characterOfPlr;
         private Camera _camera;
@@ -21,6 +21,7 @@ namespace MultiPlayRPG
         private void Awake()
         {
             _camera = Camera.main;
+            _movementMask = LayerManager.GetLayerMask(Layers.Ground);
         }
 
         private void Update()

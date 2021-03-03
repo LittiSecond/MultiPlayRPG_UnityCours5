@@ -8,7 +8,7 @@ namespace MultiPlayRPG
         #region Fields
 
         private Camera _camera;
-        private LayerMask _mask = 0x0400;
+        private LayerMask _mask;
 
         private int _damag = 10;
 
@@ -20,6 +20,7 @@ namespace MultiPlayRPG
         private void Start()
         {
             _camera = Camera.main;
+            _mask = LayerManager.GetLayerMask(Layers.PlayersCharacters, Layers.Enemies);
             if (!isServer)
             {
                 this.enabled = false;
