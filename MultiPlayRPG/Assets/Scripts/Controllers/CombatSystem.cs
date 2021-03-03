@@ -10,6 +10,10 @@ namespace MultiPlayRPG
         #region Fields
 
         [SerializeField] float _attackSpeed = 1.0f;
+
+        public delegate void CombatDenegate();
+        [SyncEvent] public event CombatDenegate EventOnAttack;
+
         float _attackCooldown = 0.0f;
 
         UnitStats _thisStats;
@@ -44,6 +48,7 @@ namespace MultiPlayRPG
                 int damag = _thisStats.Damag.GetValue();
                 target.TakeDamag(damag);
                 _attackCooldown = 1.0f / _attackSpeed;
+                EventOnAttack();
                 return true;
             }
             return false;

@@ -10,6 +10,10 @@ namespace MultiPlayRPG
         public Stat Damag;
 
         [SerializeField] private int _maxHealth;
+
+        public delegate void StatsDenegate();
+        [SyncEvent] public event StatsDenegate EventOnDamage;
+
         [SyncVar] private int _currentHealth;
 
         #endregion
@@ -57,6 +61,7 @@ namespace MultiPlayRPG
             }
 
             _currentHealth -= amount;
+            EventOnDamage();
             if (_currentHealth < 0)
             {
                 _currentHealth = 0;

@@ -10,6 +10,11 @@ namespace MultiPlayRPG
         [SerializeField] protected UnitMotor _motor;
         [SerializeField] protected UnitStats _stats;
 
+        public delegate void UnitDenegate();
+        //[SyncEvent] public event UnitDenegate EventOnDamage;
+        [SyncEvent] public event UnitDenegate EventOnDie;
+        [SyncEvent] public event UnitDenegate EventOnRevive;
+
         protected Interactable _focus;
         protected bool _isAlive = true;
         protected bool _haveFocus;
@@ -63,6 +68,7 @@ namespace MultiPlayRPG
             _isAlive = false;
             if (isServer)
             {
+                EventOnDie();
                 _hasInteract = false;
                 _motor.MoveToPoint(transform.position);
                 RpcDie();
@@ -76,6 +82,7 @@ namespace MultiPlayRPG
             _isAlive = true;
             if (isServer)
             {
+                EventOnRevive();
                 _hasInteract = true;
                 _stats.SetHealthRate(1);
                 RpcRevive();
