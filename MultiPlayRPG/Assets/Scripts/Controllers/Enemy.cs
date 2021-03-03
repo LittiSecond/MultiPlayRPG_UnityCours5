@@ -66,7 +66,28 @@ namespace MultiPlayRPG
         protected override void OnAliveUpdate()
         {
             base.OnAliveUpdate();
-            Wandering(Time.deltaTime);
+            if (!_haveFocus)
+            {
+                Wandering(Time.deltaTime);
+                if (_aggressive)
+                {
+                    FindEnemy();
+                }
+            }
+            else
+            {
+                float distance = Vector3.Distance(
+                    _focus.InteractionTransform.position, transform.position);
+                if (distance > _viewDistance || !_focus.HasInteract)
+                {
+                    RemoveFocus();
+                }
+                else if (distance < _focus.Radius)
+                {
+                    _focus.Interact(gameObject);
+                }
+            }
+
         }
 
         private void Wandering(float deltaTime)
@@ -97,7 +118,39 @@ namespace MultiPlayRPG
             }
         }
 
+        private void FindEnemy()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _viewDistance, _playerMask);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Interactable interactable = colliders[i].GetComponent<Interactable>();
+                if (interactable != null)
+                {
+                    if (interactable.HasInteract)
+                    {
+                        SetFocus(interactable);
+                        break;
+                    }
+                }
+            }
+        }
 
+        protected override void OnDrawGizmosSelected()
+        {
+            //base.OnDrawGizmosSelected();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _viewDistance);
+        }
+
+        public override bool Interact(GameObject luser)
+        {
+            if (base.Interact(luser))
+            {
+                SetFocus(luser.GetComponent<Interactable>());
+                return true;
+            }
+            return false;
+        }
 
         #endregion
 

@@ -12,6 +12,7 @@ namespace MultiPlayRPG
 
         protected Interactable _focus;
         protected bool _isAlive = true;
+        protected bool _haveFocus;
 
         #endregion
 
@@ -108,6 +109,7 @@ namespace MultiPlayRPG
             if (newFocus != _focus)
             {
                 _focus = newFocus;
+                _haveFocus = _focus != null; 
                 _motor.FollowTarget(newFocus);
             }
         }
@@ -115,6 +117,7 @@ namespace MultiPlayRPG
         protected virtual void RemoveFocus()
         {
             _focus = null;
+            _haveFocus = false;
             _motor.StopFollowingTarget();
         }
 

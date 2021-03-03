@@ -32,6 +32,19 @@ namespace MultiPlayRPG
         #endregion
 
 
+        #region UnityMethods
+
+        protected virtual void Awake()
+        {
+            if (InteractionTransform == null)
+            {
+                InteractionTransform = transform;
+            }
+        }
+
+        #endregion
+
+
         #region Methods
 
         public virtual bool Interact(GameObject luser)
