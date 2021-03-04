@@ -39,6 +39,17 @@ namespace MultiPlayRPG
             }
         }
 
+        public override bool OnCheckObserver(NetworkConnection conn)
+        {
+            return false;
+        }
+
+
+        #endregion
+
+
+        #region Methods
+
         [Command]
         public void CmdCreatePlayer()
         {
