@@ -10,8 +10,10 @@ namespace MultiPlayRPG
 
         public event SyncList<Item>.SyncListChanged OnItemChanged;
 
-        public int Space = 17;
+        public Transform DropPoint;
         public SyncListItem Items = new SyncListItem();
+        public int Space = 17;
+
 
         #endregion
 
@@ -48,7 +50,7 @@ namespace MultiPlayRPG
         }
 
         [Command]
-        void CmdRemoveItem(int index)
+        private void CmdRemoveItem(int index)
         {
             if (Items[index] != null)
             {
@@ -59,6 +61,14 @@ namespace MultiPlayRPG
         private void ItemChanged(SyncList<Item>.Operation op, int itemIndex)
         {
             OnItemChanged(op, itemIndex);
+        }
+
+        private void Drop(Item item)
+        {
+            ItemPickUp pickupitem = Instantiate(item.PickUpPrefab, DropPoint.position,
+                Quaternion.Euler(0, UnityEngine.Random.Range(0, 360.0f), 0));
+            pickupitem.ItemScriptableObject = item;
+            NetworkServer.Spawn(pickupitem.gameObject);
         }
 
         #endregion
