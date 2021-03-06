@@ -10,9 +10,10 @@ namespace MultiPlayRPG
 
         private const float NOT_MOVE_THRESHOLD = 0.01f;
 
-
         [SerializeField] private Animator _animator;
         [SerializeField] private NavMeshAgent _agent;
+
+        private int _movingHash = Animator.StringToHash("Move");
 
         #endregion
 
@@ -23,11 +24,11 @@ namespace MultiPlayRPG
         {
             if (_agent.velocity.magnitude < NOT_MOVE_THRESHOLD)
             {
-                _animator.SetBool("Moving", false);
+                _animator.SetBool(_movingHash, false);
             }
             else
             {
-                _animator.SetBool("Moving", true);
+                _animator.SetBool(_movingHash, true);
             }
         }
 
