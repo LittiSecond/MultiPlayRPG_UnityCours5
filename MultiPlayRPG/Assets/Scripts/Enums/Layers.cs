@@ -6,5 +6,6 @@
         Ground            = 9,
         PlayersCharacters = 10,
         Enemies           = 11,
+        Items             = 12,
     }
 }

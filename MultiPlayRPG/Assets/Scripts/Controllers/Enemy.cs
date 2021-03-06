@@ -87,12 +87,15 @@ namespace MultiPlayRPG
                 }
                 else if (distance < _focus.Radius)
                 {
-                    //_focus.Interact(gameObject);
-                    ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
-                    if (takerDamag != null)
+                    if ( !_focus.Interact(gameObject))
                     {
-                        _combatSystem.Attack(takerDamag);
+                        RemoveFocus();
                     }
+                    //ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                    //if (takerDamag != null)
+                    //{
+                    //    _combatSystem.Attack(takerDamag);
+                    //}
                 }
             }
 

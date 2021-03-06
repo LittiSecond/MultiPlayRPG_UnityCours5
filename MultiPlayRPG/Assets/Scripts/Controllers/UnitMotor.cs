@@ -9,6 +9,8 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        private const float MIN_ROTATION_SQR_DISTANCE = 0.04f;
+
         private NavMeshAgent _agent;
         private Transform _taget;
 
@@ -69,10 +71,13 @@ namespace MultiPlayRPG
             if (_haveTarget)
             {
                 Vector3 direction = _taget.position - transform.position;
-                Quaternion lookRotation = Quaternion.LookRotation(
-                    new Vector3(direction.x, 0.0f, direction.z));
-                transform.rotation = Quaternion.Slerp(transform.rotation, 
-                    lookRotation, Time.deltaTime * 5.0f);
+                if (direction.sqrMagnitude > MIN_ROTATION_SQR_DISTANCE)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(
+                        new Vector3(direction.x, 0.0f, direction.z));
+                    transform.rotation = Quaternion.Slerp(transform.rotation,
+                        lookRotation, Time.deltaTime * 5.0f);
+                }
             }
         }
 

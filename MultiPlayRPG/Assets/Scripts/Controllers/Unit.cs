@@ -130,10 +130,15 @@ namespace MultiPlayRPG
 
         public override bool Interact(GameObject luser)
         {
-            //return base.Interact(luser);
-            Debug.Log("Unit::Interact: " + gameObject.name + " interact with " +
-                luser.name);
-            return true;
+            CombatSystem combat = luser.GetComponent<CombatSystem>();
+            if (combat != null)
+            {
+                if (combat.Attack(_stats))
+                {
+                    return true;
+                }
+            }
+            return base.Interact(luser);
         }
 
         #endregion

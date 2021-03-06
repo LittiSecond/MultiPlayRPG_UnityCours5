@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3056644641072664262}
   - component: {fileID: 3031948498046392844}
   - component: {fileID: 3041972843926206724}
-  - component: {fileID: 3054419447924781835}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,19 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3054419447924781835
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054419447924781836}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.91, y: 0.16, z: 4.17}
-  m_Center: {x: 0.10723421, y: -0.000000022351742, z: -0.014668226}
 --- !u!1 &8996475915749072767
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +91,8 @@ GameObject:
   - component: {fileID: 5065109233286374099}
   - component: {fileID: 7400118233292473942}
   - component: {fileID: 8347621411318316968}
-  m_Layer: 0
+  - component: {fileID: 899190478386606762}
+  m_Layer: 12
   m_Name: Sword1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,3 +185,16 @@ MonoBehaviour:
   Radius: 1
   ItemScriptableObject: {fileID: 11400000, guid: 02022cd3cf1181348be20fb3e28baf44,
     type: 2}
+--- !u!65 &899190478386606762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996475915749072767}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.07, z: 1.3}
+  m_Center: {x: 0.033, y: 0.06, z: 0}
