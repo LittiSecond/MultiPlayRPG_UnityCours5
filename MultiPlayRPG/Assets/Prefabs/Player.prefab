@@ -82,6 +82,7 @@ MonoBehaviour:
   _unitPrefab: {fileID: 8251842341188825993, guid: a2f17fe8df010e94d8d29c1957bb85e5,
     type: 3}
   _controller: {fileID: 1566287829488950694}
+  _inventory: {fileID: 5425895340634519042}
 --- !u!114 &1566287829488950694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df223269e74a43d42af851e9e8b7d132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DropPoint: {fileID: 0}
   Space: 11
-  Items: []

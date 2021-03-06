@@ -13,5 +13,15 @@ namespace MultiPlayRPG
         public ItemPickUp PickUpPrefab;
 
         #endregion
+
+
+        #region Methods
+
+        public virtual void Use()
+        {
+            Debug.Log("Item::Use: Using " + Name);
+        }
+
+        #endregion
     }
 }
