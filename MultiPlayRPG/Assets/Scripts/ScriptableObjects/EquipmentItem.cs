@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MultiPlayRPG
 {
     [CreateAssetMenu(fileName = "New equipment", menuName = "CustomMenu/Inventory/Equipment")]
-    public class EquiomentItem : Item
+    public class EquipmentItem : Item
     {
         #region Fields
 

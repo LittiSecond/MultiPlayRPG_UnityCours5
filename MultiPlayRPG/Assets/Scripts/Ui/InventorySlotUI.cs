@@ -41,7 +41,7 @@ namespace MultiPlayRPG
 
         public void OnRemoveButton()
         {
-            Inventoryy.Remove(_item);
+            Inventoryy.DropItem(_item);
         }
 
         public void UseItem()

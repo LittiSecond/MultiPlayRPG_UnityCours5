@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections.Generic;
+
 
 namespace MultiPlayRPG
 {
@@ -10,7 +10,8 @@ namespace MultiPlayRPG
 
         public event SyncList<Item>.SyncListChanged OnItemChanged;
 
-        public Transform DropPoint;
+        //public Transform DropPoint;
+        public PlayerScriptsConnector PlayerScriptsConnectorr;
         public SyncListItem Items = new SyncListItem();
         public int Space = 17;
 
@@ -31,7 +32,7 @@ namespace MultiPlayRPG
 
         #region Methods
 
-        public bool Add(Item item)
+        public bool AddItem(Item item)
         {
             if (Items.Count < Space)
             {
@@ -44,14 +45,14 @@ namespace MultiPlayRPG
             }
         }
 
-        public void Remove(Item item)
+        public void DropItem(Item item)
         {
             //Items.Remove(item);
-            CmdRemoveItem(Items.IndexOf(item));
+            CmdDropItem(Items.IndexOf(item));
         }
 
         [Command]
-        private void CmdRemoveItem(int index)
+        private void CmdDropItem(int index)
         {
             if (Items[index] != null)
             {
@@ -67,7 +68,8 @@ namespace MultiPlayRPG
 
         private void Drop(Item item)
         {
-            ItemPickUp pickupitem = Instantiate(item.PickUpPrefab, DropPoint.position,
+            ItemPickUp pickupitem = Instantiate(item.PickUpPrefab, 
+                PlayerScriptsConnectorr.Character.transform.position,
                 Quaternion.Euler(0, UnityEngine.Random.Range(0, 360.0f), 0));
             pickupitem.ItemScriptableObject = item;
             NetworkServer.Spawn(pickupitem.gameObject);
