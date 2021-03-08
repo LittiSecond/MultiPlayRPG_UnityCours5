@@ -46,7 +46,8 @@ namespace MultiPlayRPG
 
         public void Remove(Item item)
         {
-            Items.Remove(item);
+            //Items.Remove(item);
+            CmdRemoveItem(Items.IndexOf(item));
         }
 
         [Command]
@@ -54,6 +55,7 @@ namespace MultiPlayRPG
         {
             if (Items[index] != null)
             {
+                Drop(Items[index]);
                 Items.RemoveAt(index);
             }
         }

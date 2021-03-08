@@ -8,6 +8,8 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        private const float RAY_CAST_DISTANCE = 98.037f;
+
         [SerializeField] private LayerMask _movementMask;
 
         private CharacterOfPlr _characterOfPlr;
@@ -37,7 +39,7 @@ namespace MultiPlayRPG
                         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                         RaycastHit hit;
 
-                        if (Physics.Raycast(ray, out hit, 100f, _movementMask))
+                        if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _movementMask))
                         {
                            CmdSetMovePoint(hit.point);
                         }
@@ -47,7 +49,7 @@ namespace MultiPlayRPG
                         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                         RaycastHit hit;
 
-                        if (Physics.Raycast(ray, out hit, 100f, _interactMask))
+                        if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _interactMask))
                         {
                             Interactable interactable = hit.collider.GetComponent<Interactable>();
                             if (interactable != null)

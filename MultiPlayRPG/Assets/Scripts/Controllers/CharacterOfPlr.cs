@@ -124,6 +124,11 @@ namespace MultiPlayRPG
             _inventory.DropPoint = transform;
         }
 
+        public bool AddToInventory(Item item)
+        {
+            return _inventory.Add(item);
+        }
+
         #endregion
     }
 }

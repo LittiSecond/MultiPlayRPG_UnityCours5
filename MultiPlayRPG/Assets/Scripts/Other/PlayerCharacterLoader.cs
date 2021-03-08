@@ -32,8 +32,9 @@ namespace MultiPlayRPG
                 GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
                 NetworkServer.Spawn(unit);
                 _unitIdentity = unit.GetComponent<NetworkIdentity>();
-                _controller.SetCharacter(unit.GetComponent<CharacterOfPlr>(), true);
-
+                CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
+                _controller.SetCharacter(character, true);
+                character.SetInventory(_inventory);
                 InventoryUI.Instance.SetInventory(_inventory);
             }
             else

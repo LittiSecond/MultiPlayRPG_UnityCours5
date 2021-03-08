@@ -27,7 +27,16 @@ namespace MultiPlayRPG
         public bool PickUp(GameObject luser)
         {
             Debug.Log("ItemPickUp::PickUp: pick up " + ItemScriptableObject.Name);
-            Destroy(gameObject);
+            CharacterOfPlr character = luser.GetComponent<CharacterOfPlr>();
+            if (character != null)
+            {
+                if (character.AddToInventory(ItemScriptableObject))
+                {
+                    Destroy(gameObject);
+                    //return true;
+                }
+            }
+
             return false;
         }
 
