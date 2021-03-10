@@ -8,11 +8,34 @@ namespace MultiPlayRPG
         #region Fields
 
         public Item ItemScriptableObject;
+        public float LiveTime = 10.0f;
+
+        private float _liveTimer;
 
         #endregion
 
 
         #region UnityMethods
+
+        private void Start()
+        {
+            _liveTimer = LiveTime;
+        }
+
+        private void Update()
+        {
+            if (isServer)
+            {
+                if (LiveTime > 0.0f)
+                {
+                    _liveTimer -= Time.deltaTime;
+                    if (_liveTimer <= 0.0f)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+            }
+        }
 
         #endregion
 

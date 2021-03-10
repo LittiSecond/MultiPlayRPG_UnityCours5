@@ -15,7 +15,7 @@ namespace MultiPlayRPG
         private int _damageHash = Animator.StringToHash("Damage");
         private int _attackHash = Animator.StringToHash("Attack");
         private int _dieHash = Animator.StringToHash("Die");
-        private int _reviveHash = Animator.StringToHash("Revive");
+        private int _reviveHash = Animator.StringToHash("Reviev");
 
         #endregion
 
