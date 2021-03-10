@@ -43,6 +43,7 @@ namespace MultiPlayRPG
             if (isLocalPlayer)
             {
                 InventoryUI.Instance.SetInventory(_inventory);
+                EquipmentUI.Instance.SetEquipment(_equipment);
             }
         }
 
