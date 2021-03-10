@@ -22,6 +22,13 @@ namespace MultiPlayRPG
         #endregion
 
 
+        #region Properties
+
+        public UnitStats Stats { get => _stats; }
+
+        #endregion
+
+
         #region UnityMethods
 
         public override void OnStartServer()

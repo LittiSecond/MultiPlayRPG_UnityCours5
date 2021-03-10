@@ -1,6 +1,6 @@
-﻿
-using UnityEngine;
-using UnityEngine.Networking;
+﻿using UnityEngine;
+using System.Collections.Generic;
+
 
 namespace MultiPlayRPG
 {
@@ -14,6 +14,8 @@ namespace MultiPlayRPG
 
         [SerializeField] private int _baseValue;
 
+        private List<int> _modifers = new List<int>();
+
         #endregion
 
 
@@ -21,7 +23,27 @@ namespace MultiPlayRPG
 
         public int GetValue()
         {
-            return _baseValue;
+            int finalValue = _baseValue;
+            _modifers.ForEach(x => finalValue += x);
+            return finalValue;
+        }
+
+        public void AddModifer(int modifer)
+        {
+            if (modifer != 0)
+            {
+                _modifers.Add(modifer);
+                OnStatChanged?.Invoke(GetValue());
+            }
+        }
+
+        public void RemoveModifer(int modifer)
+        {
+            if (modifer != 0)
+            {
+                _modifers.Remove(modifer);
+                OnStatChanged?.Invoke(GetValue());
+            }
         }
 
         #endregion

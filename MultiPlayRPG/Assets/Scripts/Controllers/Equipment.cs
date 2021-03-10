@@ -39,12 +39,14 @@ namespace MultiPlayRPG
                 if (((EquipmentItem)Items[i]).EquipmentSlot == item.EquipmentSlot)
                 {
                     oldItem = (EquipmentItem)Items[i];
+                    oldItem.UnEquip(PlayerScriptsConnectorr);
                     Items.RemoveAt(i);
                     break;
                 }
             }
 
             Items.Add(item);
+            item.Equip(PlayerScriptsConnectorr);
 
             return oldItem;
         }
@@ -60,6 +62,7 @@ namespace MultiPlayRPG
             if (Items[index] != null  && 
                 PlayerScriptsConnectorr.Inventoryy.AddItem(Items[index]) )
             {
+                ((EquipmentItem)Items[index]).UnEquip(PlayerScriptsConnectorr);
                 Items.RemoveAt(index);
             }
         }
