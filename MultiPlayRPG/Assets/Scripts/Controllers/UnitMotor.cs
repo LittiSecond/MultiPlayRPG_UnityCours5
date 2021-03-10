@@ -21,7 +21,7 @@ namespace MultiPlayRPG
 
         #region UnityMethods
 
-        private void Start()
+        private void Awake()
         {
             _agent = GetComponent<NavMeshAgent>();
         }
@@ -79,6 +79,11 @@ namespace MultiPlayRPG
                         lookRotation, Time.deltaTime * 5.0f);
                 }
             }
+        }
+
+        public void SetMoveSpeed(int speed)
+        {
+            _agent.speed = speed;
         }
 
         #endregion

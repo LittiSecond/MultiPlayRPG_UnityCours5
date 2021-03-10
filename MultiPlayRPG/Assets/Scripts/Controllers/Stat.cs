@@ -9,6 +9,9 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        public delegate void StatChanged(int value);
+        public event StatChanged OnStatChanged;
+
         [SerializeField] private int _baseValue;
 
         #endregion

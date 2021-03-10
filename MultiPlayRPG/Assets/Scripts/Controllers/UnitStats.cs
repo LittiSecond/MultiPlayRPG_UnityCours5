@@ -8,6 +8,8 @@ namespace MultiPlayRPG
         #region Fields
 
         public Stat Damag;
+        public Stat Armor;
+        public Stat MoveSpeed;
 
         [SerializeField] private int _maxHealth;
 
@@ -54,6 +56,8 @@ namespace MultiPlayRPG
             {
                 return;
             }
+
+            amount -= Armor.GetValue();
 
             if (amount < 0)
             {

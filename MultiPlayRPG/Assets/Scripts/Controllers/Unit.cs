@@ -24,6 +24,12 @@ namespace MultiPlayRPG
 
         #region UnityMethods
 
+        public override void OnStartServer()
+        {
+            _motor.SetMoveSpeed(_stats.MoveSpeed.GetValue());
+            _stats.MoveSpeed.OnStatChanged += _motor.SetMoveSpeed;
+        }
+
         private void Update()
         {
             OnUpdate();
