@@ -66,6 +66,7 @@ namespace MultiPlayRPG
             _inventory = GetComponent<Inventory>();
             Equipment equipment = GetComponent<Equipment>();
             _scriptsConnectorr.Setup(character, _inventory, equipment, false);
+            _controller.SetCharacter(character, true);
         }
 
         [ClientCallback]
