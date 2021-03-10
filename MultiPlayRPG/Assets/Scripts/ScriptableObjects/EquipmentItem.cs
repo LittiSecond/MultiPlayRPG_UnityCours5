@@ -20,11 +20,15 @@ namespace MultiPlayRPG
 
         #region Methods
 
-        public override void Use()
+        public override void Use(PlayerScriptsConnector player)
         {
-
-
-            base.Use();
+            player.Inventoryy.RemoveItem(this);
+            EquipmentItem oldItem = player.Equipmentt.EquipItem(this);
+            if (oldItem != null)
+            {
+                player.Inventoryy.AddItem(oldItem);
+            }
+            base.Use(player);
         }
 
         #endregion

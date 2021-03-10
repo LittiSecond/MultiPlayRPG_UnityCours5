@@ -17,7 +17,7 @@ namespace MultiPlayRPG
 
         #region Methods
 
-        public virtual void Use()
+        public virtual void Use(PlayerScriptsConnector player)
         {
             Debug.Log("Item::Use: Using " + Name);
         }

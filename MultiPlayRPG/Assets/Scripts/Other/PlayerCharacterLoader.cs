@@ -9,8 +9,10 @@ namespace MultiPlayRPG
 
         [SerializeField] private GameObject _unitPrefab;
         [SerializeField] private CharacterOfPlayerController _controller;
-        [SerializeField] private Inventory _inventory;
+
         [SerializeField] private PlayerScriptsConnector _scriptsConnectorr;
+
+        private Inventory _inventory;
 
         [SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
 
@@ -37,6 +39,7 @@ namespace MultiPlayRPG
                 _inventory = GetComponent<Inventory>();
                 Equipment equipment = GetComponent<Equipment>();
                 _scriptsConnectorr.Setup(character, _inventory, equipment, true);
+                _controller.SetCharacter(character, true);
             }
             else
             {

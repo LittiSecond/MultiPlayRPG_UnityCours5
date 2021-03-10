@@ -48,7 +48,7 @@ namespace MultiPlayRPG
         {
             if (_item != null)
             {
-                _item.Use();
+                Inventoryy.UseItem(_item);
             }
         }
 

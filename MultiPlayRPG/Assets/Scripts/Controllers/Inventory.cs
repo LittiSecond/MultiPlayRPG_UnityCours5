@@ -75,6 +75,27 @@ namespace MultiPlayRPG
             NetworkServer.Spawn(pickupitem.gameObject);
         }
 
+        public void UseItem(Item item)
+        {
+            CmdUseItem(Items.IndexOf(item));
+        }
+
+
+        [Command]
+        void CmdUseItem(int index)
+        {
+            if (Items[index] != null)
+            {
+                Items[index].Use(PlayerScriptsConnectorr);
+            }
+        }
+
+        public void RemoveItem(Item item)
+        {
+            Items.Remove(item);
+        }
+
+
         #endregion
     }
 }
