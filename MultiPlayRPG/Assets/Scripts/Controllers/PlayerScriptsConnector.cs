@@ -42,17 +42,19 @@ namespace MultiPlayRPG
             _character.PlayerScriptsConnectorr = this;
             _inventory.PlayerScriptsConnectorr = this;
             _equipment.PlayerScriptsConnectorr = this;
+            _statsManager = GetComponent<StatsManager>();
 
             if (isLocalPlayer)
             {
                 InventoryUI.Instance.SetInventory(_inventory);
                 EquipmentUI.Instance.SetEquipment(_equipment);
+                StatsUI.Instance.SetManager(_statsManager);
             }
 
-            _statsManager = GetComponent<StatsManager>();
             if (GetComponent<NetworkIdentity>().isServer)
             {
                 _character.Stats.Manager = _statsManager;
+
             }
         }
 
