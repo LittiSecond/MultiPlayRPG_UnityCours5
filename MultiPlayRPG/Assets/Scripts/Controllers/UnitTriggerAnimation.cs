@@ -12,6 +12,11 @@ namespace MultiPlayRPG
         [SerializeField] UnitStats _stats;
         [SerializeField] CombatSystem _combat;
 
+        private int _damageHash = Animator.StringToHash("Damage");
+        private int _attackHash = Animator.StringToHash("Attack");
+        private int _dieHash = Animator.StringToHash("Die");
+        private int _reviveHash = Animator.StringToHash("Revive");
+
         #endregion
 
 
@@ -32,24 +37,24 @@ namespace MultiPlayRPG
 
         private void Damage()
         {
-            _animator.SetTrigger("Damage");
+            _animator.SetTrigger(_damageHash);
         }
 
         private void Die()
         {
-            _animator.SetTrigger("Die");
+            _animator.SetTrigger(_dieHash);
         }
 
         private void Revive()
         {
-            _animator.ResetTrigger("Damage");
-            _animator.ResetTrigger("Attack");
-            _animator.SetTrigger("Revive");
+            _animator.ResetTrigger(_damageHash);
+            _animator.ResetTrigger(_attackHash);
+            _animator.SetTrigger(_reviveHash);
         }
 
         private void Attack()
         {
-            _animator.SetTrigger("Attack");
+            _animator.SetTrigger(_attackHash);
         }
 
         #endregion

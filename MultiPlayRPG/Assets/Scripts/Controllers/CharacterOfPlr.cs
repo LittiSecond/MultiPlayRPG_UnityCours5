@@ -11,6 +11,7 @@ namespace MultiPlayRPG
         [SerializeField] private float _revievDelay = 5.0f;
 
         private CombatSystem _combatSystem;
+        private Inventory _inventory;
         private Vector3 _startPosition;
         private float _revievTime;
 
@@ -51,12 +52,15 @@ namespace MultiPlayRPG
                         _focus.InteractionTransform.position, transform.position);
                     if (distance <= _focus.Radius)
                     {
-                        //_focus.Interact(gameObject);
-                        ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
-                        if (takerDamag != null)
+                        if ( !_focus.Interact(gameObject))
                         {
-                            _combatSystem.Attack(takerDamag);
+                            RemoveFocus();
                         }
+                        //ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                        //if (takerDamag != null)
+                        //{
+                        //    _combatSystem.Attack(takerDamag);
+                        //}
                     }
                 }
             }
@@ -114,6 +118,16 @@ namespace MultiPlayRPG
 
         }
 
+        public void SetInventory(Inventory inventory)
+        {
+            _inventory = inventory;
+            _inventory.DropPoint = transform;
+        }
+
+        public bool AddToInventory(Item item)
+        {
+            return _inventory.Add(item);
+        }
 
         #endregion
     }

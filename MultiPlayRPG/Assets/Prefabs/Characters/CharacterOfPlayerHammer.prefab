@@ -1873,7 +1873,7 @@ Animator:
   m_GameObject: {fileID: 6961305208952399978}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: c04a63d584e38cb49a59057edbeb4e2c, type: 3}
-  m_Controller: {fileID: 9100000, guid: bd7136bc5fb95e84f9fce9f000bc7dcb, type: 2}
+  m_Controller: {fileID: 9100000, guid: 68807b6aa223b864a9ae496ac7784811, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1941,8 +1941,8 @@ GameObject:
   - component: {fileID: 6280364128323349333}
   - component: {fileID: 3600725807272917611}
   - component: {fileID: 4721903721185874444}
-  - component: {fileID: 8251842341188826036}
   - component: {fileID: 3995891084860560347}
+  - component: {fileID: 8251842341188826036}
   - component: {fileID: 6891130415430224167}
   - component: {fileID: 290569913625405369}
   - component: {fileID: 5898334578504255807}
@@ -2087,18 +2087,6 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
---- !u!114 &8251842341188826036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8251842341188825993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340b6dabb5f947743be078246492ddb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!143 &3995891084860560347
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2117,6 +2105,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &8251842341188826036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251842341188825993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340b6dabb5f947743be078246492ddb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6891130415430224167
 MonoBehaviour:
   m_ObjectHideFlags: 0

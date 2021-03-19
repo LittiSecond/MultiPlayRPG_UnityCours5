@@ -9,6 +9,7 @@ namespace MultiPlayRPG
 
         [SerializeField] private GameObject _unitPrefab;
         [SerializeField] private CharacterOfPlayerController _controller;
+        [SerializeField] private Inventory _inventory;
 
         [SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
 
@@ -31,13 +32,27 @@ namespace MultiPlayRPG
                 GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
                 NetworkServer.Spawn(unit);
                 _unitIdentity = unit.GetComponent<NetworkIdentity>();
-                _controller.SetCharacter(unit.GetComponent<CharacterOfPlr>(), true);
+                CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
+                _controller.SetCharacter(character, true);
+                character.SetInventory(_inventory);
+                InventoryUI.Instance.SetInventory(_inventory);
             }
             else
             {
                 CmdCreatePlayer();
             }
         }
+
+        public override bool OnCheckObserver(NetworkConnection conn)
+        {
+            return false;
+        }
+
+
+        #endregion
+
+
+        #region Methods
 
         [Command]
         public void CmdCreatePlayer()
@@ -54,7 +69,10 @@ namespace MultiPlayRPG
             if (isLocalPlayer)
             {
                 _unitIdentity = unit;
-                _controller.SetCharacter(unit.GetComponent<CharacterOfPlr>(), true);
+                CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
+                _controller.SetCharacter(character, true);
+                character.SetInventory(_inventory);
+                InventoryUI.Instance.SetInventory(_inventory);
             }
         }
 
