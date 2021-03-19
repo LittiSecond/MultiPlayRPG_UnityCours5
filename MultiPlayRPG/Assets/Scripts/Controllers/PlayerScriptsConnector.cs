@@ -46,6 +46,7 @@ namespace MultiPlayRPG
             _equipment.PlayerScriptsConnectorr = this;
             _statsManager = GetComponent<StatsManager>();
             _progress = GetComponent<CharacterProgress>();
+            _statsManager.Player = this;
 
             if (isLocalPlayer)
             {

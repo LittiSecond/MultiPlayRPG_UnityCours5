@@ -114,6 +114,22 @@ namespace MultiPlayRPG
             _moveSpeedStat.SetUpgradable(isActive);
         }
 
+        public void UpgradeStat(StatItemUI stat)
+        {
+            if (stat == _damagStat)
+            {
+                _manager.CmdUpgradeStat((int)StatType.Damage);
+            }
+            else if (stat == _armorStat)
+            {
+                _manager.CmdUpgradeStat((int)StatType.Armor);
+            }
+            else if (stat == _moveSpeedStat)
+            {
+                _manager.CmdUpgradeStat((int)StatType.MoveSpeed);
+            }
+        }
+
         #endregion
     }
 }

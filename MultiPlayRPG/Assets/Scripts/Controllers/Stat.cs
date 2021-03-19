@@ -19,6 +19,21 @@ namespace MultiPlayRPG
         #endregion
 
 
+        #region Properties
+
+        public int BaseValue
+        {
+            get { return _baseValue; }
+            set
+            {
+                _baseValue = value;
+                OnStatChanged?.Invoke(GetValue());
+            }
+        }
+
+        #endregion
+
+
         #region Methods
 
         public int GetValue()
