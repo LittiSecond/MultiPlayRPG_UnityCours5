@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 
 namespace MultiPlayRPG
@@ -11,6 +10,7 @@ namespace MultiPlayRPG
         [SerializeField] GameObject _gfx;
         [SerializeField] private float _revievDelay = 5.0f;
 
+        private CombatSystem _combatSystem;
         private Vector3 _startPosition;
         private float _revievTime;
 
@@ -21,6 +21,7 @@ namespace MultiPlayRPG
 
         private void Start()
         {
+            _combatSystem = GetComponent<CombatSystem>();
             _startPosition = transform.position;
             _revievTime = _revievDelay;
         }
@@ -34,6 +35,32 @@ namespace MultiPlayRPG
 
 
         #region Methods
+
+        protected override void OnAliveUpdate()
+        {
+            base.OnAliveUpdate();
+            if (_haveFocus)
+            {
+                if (!_focus.HasInteract)
+                {
+                    RemoveFocus();
+                }
+                else
+                {
+                    float distance = Vector3.Distance(
+                        _focus.InteractionTransform.position, transform.position);
+                    if (distance <= _focus.Radius)
+                    {
+                        //_focus.Interact(gameObject);
+                        ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                        if (takerDamag != null)
+                        {
+                            _combatSystem.Attack(takerDamag);
+                        }
+                    }
+                }
+            }
+        }
 
         protected override void OnDeadUpdate()
         {
@@ -70,9 +97,23 @@ namespace MultiPlayRPG
         {
             if (_isAlive)
             {
+                RemoveFocus();
                 _motor.MoveToPoint(point);
             }
         }
+
+        public void SetNewFocus(Interactable newFocus )
+        {
+            if (_isAlive)
+            {
+                if (newFocus.HasInteract)
+                {
+                    SetFocus(newFocus);
+                }
+            }
+
+        }
+
 
         #endregion
     }

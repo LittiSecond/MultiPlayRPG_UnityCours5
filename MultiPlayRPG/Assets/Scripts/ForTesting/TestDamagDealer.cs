@@ -8,9 +8,10 @@ namespace MultiPlayRPG
         #region Fields
 
         private Camera _camera;
-        private LayerMask _mask = 0x0400;
+        private LayerMask _mask;
 
         private int _damag = 10;
+        private int _healing = 10;
 
         #endregion
 
@@ -20,6 +21,7 @@ namespace MultiPlayRPG
         private void Start()
         {
             _camera = Camera.main;
+            _mask = LayerManager.GetLayerMask(Layers.PlayersCharacters, Layers.Enemies);
             if (!isServer)
             {
                 this.enabled = false;
@@ -28,8 +30,19 @@ namespace MultiPlayRPG
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.M) )
+            KeyCode keyCode = 0;
+
+            if (Input.GetKeyDown(KeyCode.M))
             {
+                keyCode = KeyCode.M;
+            }
+            else if (Input.GetKeyDown(KeyCode.H))
+            {
+                keyCode = KeyCode.H;
+            }
+
+            if (keyCode != 0)
+            { 
                 //Debug.Log("TestDamagDealer->Update:");
                 Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -39,10 +52,21 @@ namespace MultiPlayRPG
                     ITakerDamag damagReceiver = hit.collider.transform.GetComponent<ITakerDamag>();
                     if (damagReceiver != null)
                     {
-                        damagReceiver.TakeDamag(_damag);
+                        if (keyCode == KeyCode.M)
+                        {
+                            damagReceiver.TakeDamag(_damag);
+                        }
+
+                        if (keyCode == KeyCode.H)
+                        {
+                            damagReceiver.TakeHealing(_healing);
+                        }
+
                     }
                 }
             }
+
+
         }
 
         #endregion

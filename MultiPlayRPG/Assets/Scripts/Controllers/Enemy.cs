@@ -19,11 +19,14 @@ namespace MultiPlayRPG
         [SerializeField] private float _revievDelay = 5.0f;
         [SerializeField] private bool _aggressive;
 
+        private CombatSystem _combatSystem;
+
         private Vector3 _startPosition;
         private Vector3 _curDistanation;
 
         private float _changePosTime;
         private float _revievTime;
+        private LayerMask _playerMask;
 
         #endregion
 
@@ -32,9 +35,11 @@ namespace MultiPlayRPG
 
         private void Start()
         {
+            _combatSystem = GetComponent<CombatSystem>();
             _startPosition = transform.position;
             _changePosTime = UnityEngine.Random.Range(_minMovementDelay, _maxMovementDelay);
             _revievTime = _revievDelay;
+            _playerMask = LayerManager.GetLayerMask(Layers.PlayersCharacters);
         }
 
         private void Update()
@@ -64,7 +69,33 @@ namespace MultiPlayRPG
         protected override void OnAliveUpdate()
         {
             base.OnAliveUpdate();
-            Wandering(Time.deltaTime);
+            if (!_haveFocus)
+            {
+                Wandering(Time.deltaTime);
+                if (_aggressive)
+                {
+                    FindEnemy();
+                }
+            }
+            else
+            {
+                float distance = Vector3.Distance(
+                    _focus.InteractionTransform.position, transform.position);
+                if (distance > _viewDistance || !_focus.HasInteract)
+                {
+                    RemoveFocus();
+                }
+                else if (distance < _focus.Radius)
+                {
+                    //_focus.Interact(gameObject);
+                    ITakerDamag takerDamag = _focus.GetComponent<ITakerDamag>();
+                    if (takerDamag != null)
+                    {
+                        _combatSystem.Attack(takerDamag);
+                    }
+                }
+            }
+
         }
 
         private void Wandering(float deltaTime)
@@ -95,6 +126,39 @@ namespace MultiPlayRPG
             }
         }
 
+        private void FindEnemy()
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _viewDistance, _playerMask);
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Interactable interactable = colliders[i].GetComponent<Interactable>();
+                if (interactable != null)
+                {
+                    if (interactable.HasInteract)
+                    {
+                        SetFocus(interactable);
+                        break;
+                    }
+                }
+            }
+        }
+
+        protected override void OnDrawGizmosSelected()
+        {
+            //base.OnDrawGizmosSelected();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _viewDistance);
+        }
+
+        public override bool Interact(GameObject luser)
+        {
+            if (base.Interact(luser))
+            {
+                SetFocus(luser.GetComponent<Interactable>());
+                return true;
+            }
+            return false;
+        }
 
         #endregion
 

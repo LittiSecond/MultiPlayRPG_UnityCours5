@@ -3,14 +3,21 @@ using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
-    public class Unit : NetworkBehaviour
+    public class Unit : Interactable
     {
         #region Fields
 
         [SerializeField] protected UnitMotor _motor;
         [SerializeField] protected UnitStats _stats;
 
+        public delegate void UnitDenegate();
+        //[SyncEvent] public event UnitDenegate EventOnDamage;
+        [SyncEvent] public event UnitDenegate EventOnDie;
+        [SyncEvent] public event UnitDenegate EventOnRevive;
+
+        protected Interactable _focus;
         protected bool _isAlive = true;
+        protected bool _haveFocus;
 
         #endregion
 
@@ -61,8 +68,12 @@ namespace MultiPlayRPG
             _isAlive = false;
             if (isServer)
             {
+                EventOnDie();
+                _hasInteract = false;
                 _motor.MoveToPoint(transform.position);
                 RpcDie();
+
+                RemoveFocus();
             }
         }
 
@@ -71,6 +82,8 @@ namespace MultiPlayRPG
             _isAlive = true;
             if (isServer)
             {
+                EventOnRevive();
+                _hasInteract = true;
                 _stats.SetHealthRate(1);
                 RpcRevive();
             }
@@ -96,6 +109,31 @@ namespace MultiPlayRPG
                     OnDeadUpdate();
                 }
             }
+        }
+
+        protected virtual void SetFocus( Interactable newFocus )
+        {
+            if (newFocus != _focus)
+            {
+                _focus = newFocus;
+                _haveFocus = _focus != null; 
+                _motor.FollowTarget(newFocus);
+            }
+        }
+
+        protected virtual void RemoveFocus()
+        {
+            _focus = null;
+            _haveFocus = false;
+            _motor.StopFollowingTarget();
+        }
+
+        public override bool Interact(GameObject luser)
+        {
+            //return base.Interact(luser);
+            Debug.Log("Unit::Interact: " + gameObject.name + " interact with " +
+                luser.name);
+            return true;
         }
 
         #endregion

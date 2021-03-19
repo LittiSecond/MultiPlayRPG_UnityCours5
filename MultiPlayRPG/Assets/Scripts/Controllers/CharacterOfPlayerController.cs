@@ -8,10 +8,11 @@ namespace MultiPlayRPG
     {
         #region Fields
 
-       [SerializeField] private LayerMask _movementMask = 0x0200;
+        [SerializeField] private LayerMask _movementMask;
 
         private CharacterOfPlr _characterOfPlr;
         private Camera _camera;
+        private LayerMask _interactMask;
  
         #endregion
 
@@ -21,6 +22,8 @@ namespace MultiPlayRPG
         private void Awake()
         {
             _camera = Camera.main;
+            _movementMask = LayerManager.GetLayerMask(Layers.Ground);
+            _interactMask = ~LayerManager.GetLayerMask(Layers.PlayersCharacters);
         }
 
         private void Update()
@@ -37,6 +40,20 @@ namespace MultiPlayRPG
                         if (Physics.Raycast(ray, out hit, 100f, _movementMask))
                         {
                            CmdSetMovePoint(hit.point);
+                        }
+                    }
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                        RaycastHit hit;
+
+                        if (Physics.Raycast(ray, out hit, 100f, _interactMask))
+                        {
+                            Interactable interactable = hit.collider.GetComponent<Interactable>();
+                            if (interactable != null)
+                            {
+                                CmdSetFocus(interactable.GetComponent<NetworkIdentity>());
+                            }
                         }
                     }
                 }
@@ -74,6 +91,12 @@ namespace MultiPlayRPG
         public void CmdSetMovePoint(Vector3 point)
         {
             _characterOfPlr.SetMovePoint(point);
+        }
+
+        [Command]
+        public void CmdSetFocus(NetworkIdentity newFocus)
+        {
+            _characterOfPlr.SetNewFocus(newFocus.GetComponent<Interactable>());
         }
 
         #endregion
