@@ -4,7 +4,8 @@ using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
-    [RequireComponent(typeof(StatsManager), typeof(NetworkIdentity))]
+    [RequireComponent(typeof(StatsManager), typeof(NetworkIdentity), 
+        typeof(CharacterProgress))]
     public class PlayerScriptsConnector : MonoBehaviour
     {
 
@@ -14,6 +15,7 @@ namespace MultiPlayRPG
         [SerializeField] private Inventory _inventory;
         [SerializeField] private Equipment _equipment;
         [SerializeField] private StatsManager _statsManager;
+        [SerializeField] private CharacterProgress _progress;
 
         #endregion
 
@@ -23,7 +25,7 @@ namespace MultiPlayRPG
         public CharacterOfPlr Character {  get { return _character; } }
         public Inventory Inventoryy { get { return _inventory; } }
         public Equipment Equipmentt { get { return _equipment; } }
-
+        public CharacterProgress Progress { get { return _progress; } }
         #endregion
 
 
@@ -43,6 +45,7 @@ namespace MultiPlayRPG
             _inventory.PlayerScriptsConnectorr = this;
             _equipment.PlayerScriptsConnectorr = this;
             _statsManager = GetComponent<StatsManager>();
+            _progress = GetComponent<CharacterProgress>();
 
             if (isLocalPlayer)
             {
@@ -54,7 +57,7 @@ namespace MultiPlayRPG
             if (GetComponent<NetworkIdentity>().isServer)
             {
                 _character.Stats.Manager = _statsManager;
-
+                _progress.Manager = _statsManager;
             }
         }
 

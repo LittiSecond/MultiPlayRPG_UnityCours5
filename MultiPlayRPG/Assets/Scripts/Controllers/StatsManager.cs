@@ -7,9 +7,14 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        [SyncVar] public float Expa;
+        [SyncVar] public float NextLevelExp;
         [SyncVar] public int Damage;
         [SyncVar] public int Armor;
         [SyncVar] public int MoveSpeed;
+        [SyncVar] public int Level;
+        [SyncVar] public int StatPoints;
+ 
 
         #endregion
 
