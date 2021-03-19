@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 3219307233204604814}
   - component: {fileID: 1566287829488950694}
   - component: {fileID: 5425895340634519042}
+  - component: {fileID: 8983008088314246586}
+  - component: {fileID: 7659262851306962681}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,6 +85,7 @@ MonoBehaviour:
     type: 3}
   _controller: {fileID: 1566287829488950694}
   _inventory: {fileID: 5425895340634519042}
+  _scriptsConnectorr: {fileID: 7659262851306962681}
 --- !u!114 &1566287829488950694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,5 +113,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df223269e74a43d42af851e9e8b7d132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DropPoint: {fileID: 0}
+  PlayerScriptsConnectorr: {fileID: 7659262851306962681}
   Space: 11
+--- !u!114 &8983008088314246586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990266384165621631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7303ccc663f07144db243706d2032590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerScriptsConnectorr: {fileID: 7659262851306962681}
+--- !u!114 &7659262851306962681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990266384165621631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d613b66bfacd8548b3febd08df941f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 0}
+  _inventory: {fileID: 0}
+  _equipment: {fileID: 0}

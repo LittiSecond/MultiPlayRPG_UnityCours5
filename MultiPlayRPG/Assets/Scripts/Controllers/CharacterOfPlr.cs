@@ -10,8 +10,10 @@ namespace MultiPlayRPG
         [SerializeField] GameObject _gfx;
         [SerializeField] private float _revievDelay = 5.0f;
 
+        public PlayerScriptsConnector PlayerScriptsConnectorr;
+
         private CombatSystem _combatSystem;
-        private Inventory _inventory;
+        //private Inventory _inventory;
         private Vector3 _startPosition;
         private float _revievTime;
 
@@ -118,15 +120,15 @@ namespace MultiPlayRPG
 
         }
 
-        public void SetInventory(Inventory inventory)
-        {
-            _inventory = inventory;
-            _inventory.DropPoint = transform;
-        }
+        //public void SetInventory(Inventory inventory)
+        //{
+        //    _inventory = inventory;
+        //    _inventory.DropPoint = transform;
+        //}
 
         public bool AddToInventory(Item item)
         {
-            return _inventory.Add(item);
+            return PlayerScriptsConnectorr.Inventoryy.AddItem(item);
         }
 
         #endregion

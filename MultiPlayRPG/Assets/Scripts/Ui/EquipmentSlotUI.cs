@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace MultiPlayRPG
 {
-    public sealed class InventorySlotUI : MonoBehaviour
+    public sealed class EquipmentSlotUI : MonoBehaviour
     {
         #region Fields
 
         public Image Icon;
-        public Button RemoveButton;
-        public Inventory Inventoryy;
+        public Button UnEquipButton;
+        public Equipment Equipmentt;
 
         private Item _item;
 
@@ -17,6 +18,14 @@ namespace MultiPlayRPG
 
 
         #region UnityMethods
+
+        private void Start()
+        {
+            if (UnEquipButton != null)
+            {
+                UnEquipButton.onClick.AddListener(UnEquip);
+            }
+        }
 
         #endregion
 
@@ -28,7 +37,7 @@ namespace MultiPlayRPG
             _item = newItem;
             Icon.sprite = _item.Icon;
             Icon.enabled = true;
-            RemoveButton.interactable = true;
+            UnEquipButton.interactable = true;
         }
 
         public void ClearSlot()
@@ -36,22 +45,16 @@ namespace MultiPlayRPG
             _item = null;
             Icon.sprite = null;
             Icon.enabled = false;
-            RemoveButton.interactable = false;
+            UnEquipButton.interactable = false;
         }
 
-        public void OnRemoveButton()
+        public void UnEquip()
         {
-            Inventoryy.DropItem(_item);
-        }
-
-        public void UseItem()
-        {
-            if (_item != null)
-            {
-                Inventoryy.UseItem(_item);
-            }
+            Equipmentt.UnEquipItem(_item);
         }
 
         #endregion
+
+
     }
 }
