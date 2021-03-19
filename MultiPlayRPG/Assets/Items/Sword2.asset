@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 3}
   EquipmentSlot: 4
   DamageModifer: 3
-  ArmorModifer: 0
+  ArmorModifer: 12
   SpeedModifer: -2

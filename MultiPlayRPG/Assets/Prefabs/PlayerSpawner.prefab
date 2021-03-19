@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5425895340634519042}
   - component: {fileID: 8983008088314246586}
   - component: {fileID: 7659262851306962681}
+  - component: {fileID: 4168511841194202910}
   m_Layer: 0
   m_Name: PlayerSpawner
   m_TagString: Untagged
@@ -84,7 +85,6 @@ MonoBehaviour:
   _unitPrefab: {fileID: 8251842341188825993, guid: a2f17fe8df010e94d8d29c1957bb85e5,
     type: 3}
   _controller: {fileID: 1566287829488950694}
-  _inventory: {fileID: 5425895340634519042}
   _scriptsConnectorr: {fileID: 7659262851306962681}
 --- !u!114 &1566287829488950694
 MonoBehaviour:
@@ -143,3 +143,18 @@ MonoBehaviour:
   _character: {fileID: 0}
   _inventory: {fileID: 0}
   _equipment: {fileID: 0}
+--- !u!114 &4168511841194202910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990266384165621631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1681a9fff349230439847b6820c961dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+  Armor: 0
+  MoveSpeed: 0

@@ -12,8 +12,6 @@ namespace MultiPlayRPG
 
         [SerializeField] private PlayerScriptsConnector _scriptsConnectorr;
 
-        private Inventory _inventory;
-
         [SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
 
         #endregion
@@ -36,9 +34,9 @@ namespace MultiPlayRPG
                 //_controller.SetCharacter(character, true);
                 //character.SetInventory(_inventory);
                 //InventoryUI.Instance.SetInventory(_inventory);
-                _inventory = GetComponent<Inventory>();
+                Inventory inventory = GetComponent<Inventory>();
                 Equipment equipment = GetComponent<Equipment>();
-                _scriptsConnectorr.Setup(character, _inventory, equipment, true);
+                _scriptsConnectorr.Setup(character, inventory, equipment, true);
                 _controller.SetCharacter(character, true);
             }
             else
@@ -63,9 +61,10 @@ namespace MultiPlayRPG
         {
             CharacterOfPlr character = CreateCharacter();
             //_controller.SetCharacter(unit.GetComponent<CharacterOfPlr>(), false);
-            _inventory = GetComponent<Inventory>();
+            Inventory inventory = GetComponent<Inventory>();
             Equipment equipment = GetComponent<Equipment>();
-            _scriptsConnectorr.Setup(character, _inventory, equipment, false);
+            _scriptsConnectorr.Setup(character, inventory, equipment, false);
+            _controller.SetCharacter(character, true);
         }
 
         [ClientCallback]
@@ -76,8 +75,8 @@ namespace MultiPlayRPG
                 _unitIdentity = unit;
                 CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
                 Equipment equipment = GetComponent<Equipment>();
-                _inventory = GetComponent<Inventory>();
-                _scriptsConnectorr.Setup(character, _inventory, equipment, true);
+                Inventory inventory = GetComponent<Inventory>();
+                _scriptsConnectorr.Setup(character, inventory, equipment, true);
                 _controller.SetCharacter(character, true);
                 //character.SetInventory(_inventory);
                 //InventoryUI.Instance.SetInventory(_inventory);

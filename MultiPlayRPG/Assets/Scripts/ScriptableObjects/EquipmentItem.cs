@@ -31,6 +31,48 @@ namespace MultiPlayRPG
             base.Use(player);
         }
 
+        public virtual void Equip(PlayerScriptsConnector connector)
+        {
+            if (connector != null)
+            {
+                UnitStats stats = connector.Character.Stats;
+                if (DamageModifer != 0)
+                {
+                    stats.Damag.AddModifer(DamageModifer);
+                }
+                if (ArmorModifer != 0)
+                {
+                    stats.Armor.AddModifer(ArmorModifer);
+                }
+                if (SpeedModifer != 0)
+                {
+                    stats.MoveSpeed.AddModifer(SpeedModifer);
+                }
+
+            }
+        }
+
+        public virtual void UnEquip(PlayerScriptsConnector connector)
+        {
+            if (connector != null)
+            {
+                UnitStats stats = connector.Character.Stats;
+                if (DamageModifer != 0)
+                {
+                    stats.Damag.RemoveModifer(DamageModifer);
+                }
+                if (ArmorModifer != 0)
+                {
+                    stats.Armor.RemoveModifer(ArmorModifer);
+                }
+                if (SpeedModifer != 0)
+                {
+                    stats.MoveSpeed.RemoveModifer(SpeedModifer);
+                }
+            }
+        }
+
+
         #endregion
     }
 }

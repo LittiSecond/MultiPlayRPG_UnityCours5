@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 
 namespace MultiPlayRPG
 {
+    [RequireComponent(typeof(StatsManager), typeof(NetworkIdentity))]
     public class PlayerScriptsConnector : MonoBehaviour
     {
 
@@ -11,6 +13,7 @@ namespace MultiPlayRPG
         [SerializeField] private CharacterOfPlr _character;
         [SerializeField] private Inventory _inventory;
         [SerializeField] private Equipment _equipment;
+        [SerializeField] private StatsManager _statsManager;
 
         #endregion
 
@@ -39,11 +42,19 @@ namespace MultiPlayRPG
             _character.PlayerScriptsConnectorr = this;
             _inventory.PlayerScriptsConnectorr = this;
             _equipment.PlayerScriptsConnectorr = this;
+            _statsManager = GetComponent<StatsManager>();
 
             if (isLocalPlayer)
             {
                 InventoryUI.Instance.SetInventory(_inventory);
                 EquipmentUI.Instance.SetEquipment(_equipment);
+                StatsUI.Instance.SetManager(_statsManager);
+            }
+
+            if (GetComponent<NetworkIdentity>().isServer)
+            {
+                _character.Stats.Manager = _statsManager;
+
             }
         }
 

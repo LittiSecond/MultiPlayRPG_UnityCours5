@@ -20,6 +20,19 @@ namespace MultiPlayRPG
         #endregion
 
 
+        #region Properties
+
+        new public PlayerStats Stats
+        {
+            get
+            {
+                return _stats as PlayerStats;
+            }
+        }
+
+        #endregion
+
+
         #region UnityMethods
 
         private void Start()

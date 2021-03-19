@@ -2146,6 +2146,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damag:
     _baseValue: 31
+  Armor:
+    _baseValue: 3
+  MoveSpeed:
+    _baseValue: 4
   _maxHealth: 127
 --- !u!114 &5898334578504255807
 MonoBehaviour:
@@ -2177,6 +2181,7 @@ MonoBehaviour:
   _stats: {fileID: 290569913625405369}
   _gfx: {fileID: 8251842341173973586}
   _revievDelay: 5
+  PlayerScriptsConnectorr: {fileID: 0}
 --- !u!114 &7144868094365893374
 MonoBehaviour:
   m_ObjectHideFlags: 0
