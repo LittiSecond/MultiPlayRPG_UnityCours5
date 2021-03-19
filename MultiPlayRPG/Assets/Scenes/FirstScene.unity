@@ -1289,6 +1289,11 @@ PrefabInstance:
       propertyPath: _aggressive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3960087066002632464, guid: 103289a2a7cde3d43b274bbd5603e4d4,
+        type: 3}
+      propertyPath: _rewardExpa
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 103289a2a7cde3d43b274bbd5603e4d4, type: 3}
 --- !u!1 &282885879
@@ -10507,6 +10512,11 @@ PrefabInstance:
     - target: {fileID: 4885079432260988, guid: 103289a2a7cde3d43b274bbd5603e4d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960087066002632464, guid: 103289a2a7cde3d43b274bbd5603e4d4,
+        type: 3}
+      propertyPath: _rewardExpa
+      value: 129
       objectReference: {fileID: 0}
     - target: {fileID: 137967903436195398, guid: 103289a2a7cde3d43b274bbd5603e4d4,
         type: 3}
