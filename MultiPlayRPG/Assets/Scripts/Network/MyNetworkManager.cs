@@ -9,7 +9,7 @@ namespace MultiPlayRPG
 
         #region Fields
 
-        public bool _isServerMode;
+        public bool ServerMode;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace MultiPlayRPG
 
         private void Start()
         {
-            if (_isServerMode)
+            if (ServerMode)
             {
                 StartServer();
             }
