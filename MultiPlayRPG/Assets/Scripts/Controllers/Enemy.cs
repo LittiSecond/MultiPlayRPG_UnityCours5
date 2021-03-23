@@ -50,6 +50,13 @@ namespace MultiPlayRPG
             OnUpdate();
         }
 
+        protected override void OnDrawGizmosSelected()
+        {
+            //base.OnDrawGizmosSelected();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _viewDistance);
+        }
+
         #endregion
 
 
@@ -147,13 +154,6 @@ namespace MultiPlayRPG
                     }
                 }
             }
-        }
-
-        protected override void OnDrawGizmosSelected()
-        {
-            //base.OnDrawGizmosSelected();
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _viewDistance);
         }
 
         public override bool Interact(GameObject luser)

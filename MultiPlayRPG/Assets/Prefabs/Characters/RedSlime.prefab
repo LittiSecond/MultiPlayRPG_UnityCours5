@@ -240,9 +240,9 @@ MonoBehaviour:
   Damag:
     _baseValue: 21
   Armor:
-    _baseValue: 0
+    _baseValue: 3
   MoveSpeed:
-    _baseValue: 0
+    _baseValue: 2
   _maxHealth: 156
 --- !u!114 &3960087066002632464
 MonoBehaviour:
