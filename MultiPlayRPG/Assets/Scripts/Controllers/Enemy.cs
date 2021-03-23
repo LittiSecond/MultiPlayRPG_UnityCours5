@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 namespace MultiPlayRPG
@@ -17,8 +18,10 @@ namespace MultiPlayRPG
 
         [SerializeField] private float _viewDistance = 5.0f;
         [SerializeField] private float _revievDelay = 5.0f;
+        [SerializeField] private float _rewardExpa;
         [SerializeField] private bool _aggressive;
 
+        private List<CharacterOfPlr> _enemies = new List<CharacterOfPlr>();
         private CombatSystem _combatSystem;
 
         private Vector3 _startPosition;
@@ -45,6 +48,13 @@ namespace MultiPlayRPG
         private void Update()
         {
             OnUpdate();
+        }
+
+        protected override void OnDrawGizmosSelected()
+        {
+            //base.OnDrawGizmosSelected();
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _viewDistance);
         }
 
         #endregion
@@ -146,13 +156,6 @@ namespace MultiPlayRPG
             }
         }
 
-        protected override void OnDrawGizmosSelected()
-        {
-            //base.OnDrawGizmosSelected();
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _viewDistance);
-        }
-
         public override bool Interact(GameObject luser)
         {
             if (base.Interact(luser))
@@ -161,6 +164,33 @@ namespace MultiPlayRPG
                 return true;
             }
             return false;
+        }
+
+        protected override void DamageWithCombat(GameObject luser)
+        {
+            base.DamageWithCombat(luser);
+            CharacterOfPlr character = luser.GetComponent<CharacterOfPlr>();
+            if (character != null && !_enemies.Contains(character))
+            {
+                _enemies.Add(character);
+            }
+        }
+
+        protected override void Die()
+        {
+            base.Die();
+            if (isServer)
+            {
+                int count = _enemies.Count;
+                if (count > 0)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        _enemies[i].PlayerScriptsConnectorr.Progress.AddExp(_rewardExpa / count);
+                    }
+                    _enemies.Clear();
+                }
+            }
         }
 
         #endregion

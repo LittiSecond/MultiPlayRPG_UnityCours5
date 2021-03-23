@@ -239,6 +239,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damag:
     _baseValue: 21
+  Armor:
+    _baseValue: 3
+  MoveSpeed:
+    _baseValue: 2
   _maxHealth: 156
 --- !u!114 &3960087066002632464
 MonoBehaviour:
@@ -261,6 +265,7 @@ MonoBehaviour:
   _maxMovementDelay: 12
   _viewDistance: 5
   _revievDelay: 5
+  _rewardExpa: 76
   _aggressive: 0
 --- !u!114 &1680219205582239754
 MonoBehaviour:

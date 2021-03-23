@@ -11,7 +11,7 @@ namespace MultiPlayRPG
         [SerializeField] protected UnitStats _stats;
 
         public delegate void UnitDenegate();
-        //[SyncEvent] public event UnitDenegate EventOnDamage;
+        [SyncEvent] public event UnitDenegate EventOnDamage;
         [SyncEvent] public event UnitDenegate EventOnDie;
         [SyncEvent] public event UnitDenegate EventOnRevive;
 
@@ -148,10 +148,16 @@ namespace MultiPlayRPG
             {
                 if (combat.Attack(_stats))
                 {
-                    return true;
+                    DamageWithCombat(luser);
                 }
+                return true;
             }
             return base.Interact(luser);
+        }
+
+        protected virtual void DamageWithCombat(GameObject luser)
+        {
+            EventOnDamage?.Invoke();
         }
 
         #endregion
