@@ -33,8 +33,9 @@ namespace MultiPlayRPG
 
         #region UnityMethods
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _collider = GetComponent<Collider>();
             _haveCollider = _collider != null;
         }
