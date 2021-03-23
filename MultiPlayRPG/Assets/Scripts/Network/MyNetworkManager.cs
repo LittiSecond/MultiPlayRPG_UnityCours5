@@ -7,7 +7,23 @@ namespace MultiPlayRPG
     public class MyNetworkManager: NetworkManager
     {
 
+        #region Fields
+
+        public bool _isServerMode;
+
+        #endregion
+
+
         #region UnityMethods
+
+        private void Start()
+        {
+            if (_isServerMode)
+            {
+                StartServer();
+            }
+        }
+
 
         public override void OnStartServer()
         {
