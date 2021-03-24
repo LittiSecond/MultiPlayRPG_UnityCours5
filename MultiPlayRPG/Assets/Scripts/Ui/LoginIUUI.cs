@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 namespace MultiPlayRPG
@@ -7,7 +8,18 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        [SerializeField] private GameObject _currentPanel;
         [SerializeField] private GameObject _loginPanel;
+        [SerializeField] private GameObject _registerPanel;
+        [SerializeField] private GameObject _loadingPanel;
+
+        [SerializeField] private InputField _loginLogin;
+        [SerializeField] private InputField _loginPass;
+        [SerializeField] private InputField _registrLogin;
+        [SerializeField] private InputField _registrPass;
+        [SerializeField] private InputField _registrConfirm;
+
+        private MyNetworkManager _mgr;
 
         #endregion
 
@@ -16,9 +28,15 @@ namespace MultiPlayRPG
 
         private void Start()
         {
-            if ( (NetworkManager.singleton as MyNetworkManager).ServerMode )
+            _mgr = NetworkManager.singleton as MyNetworkManager;
+            if (_mgr.ServerMode )
             {
                 _loginPanel.SetActive(false);
+            }
+            else
+            {
+                _mgr.loginResponseDelegate = LoginResponse;
+                _mgr.registerResponseDelegate = RegisterResponse;
             }
         }
 
@@ -29,8 +47,86 @@ namespace MultiPlayRPG
 
         public void Login()
         {
-            NetworkManager.singleton.StartClient();
+            //NetworkManager.singleton.StartClient();
+            _mgr.Login(_loginLogin.text, _loginPass.text);
+            _currentPanel.SetActive(false);
+            _loadingPanel.SetActive(true);
         }
+
+        private void ClearInputs()
+        {
+            _loginLogin.text = string.Empty;
+            _loginPass.text = string.Empty;
+            _registrLogin.text = string.Empty;
+            _registrPass.text = string.Empty;
+            _registrConfirm.text = string.Empty;
+        }
+
+        public void SetPenel(GameObject panel)
+        {
+            _currentPanel.SetActive(false);
+            _currentPanel = panel;
+            _currentPanel.SetActive(true);
+            ClearInputs();
+        }
+
+        public void Register()
+        {
+            if (_registrPass.text != string.Empty && _registrPass.text == _registrConfirm.text)
+            {
+                _mgr.Register(_registrLogin.text, _registrPass.text);
+                _currentPanel.SetActive(false);
+                _loadingPanel.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Error: Password Incorrect");
+                ClearInputs(); 
+            }
+        }
+
+        public void LoginResponse(string response)
+        {
+            switch (response)
+            {
+                case "UserError":
+                    Debug.Log("Error: Username not Found");
+                    break;
+                case "PassError":
+                    Debug.Log("Error: Password Incorrect");
+                    break;
+                default:
+                    Debug.Log("Error: Unknown Error. Please try again later.");
+                    break;
+            }
+            Debug.Log("LoginIUUI::LoginResponse: response = " + response);
+
+            _loadingPanel.SetActive(false);
+            _currentPanel.SetActive(true);
+            ClearInputs();
+        }
+
+        public void RegisterResponse(string response)
+        {
+            switch (response)
+            {
+                case "Success":
+                    Debug.Log("User registered");
+                    break;
+                case "UserError":
+                    Debug.Log("Error: Username Already Taken");
+                    break;
+                default:
+                    Debug.Log("Error: Unknown Error. Please try again later.");
+                    break;
+            }
+            Debug.Log("LoginIUUI::RegisterResponse: response = " + response);
+
+            _loadingPanel.SetActive(false);
+            _currentPanel.SetActive(true);
+            ClearInputs();
+        }
+
 
         #endregion
     }

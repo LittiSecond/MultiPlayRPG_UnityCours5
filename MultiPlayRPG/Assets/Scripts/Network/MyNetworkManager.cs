@@ -11,6 +11,10 @@ namespace MultiPlayRPG
 
         public bool ServerMode;
 
+        public delegate void ResponseDelegate(string response);
+        public ResponseDelegate loginResponseDelegate;
+        public ResponseDelegate registerResponseDelegate;
+
         #endregion
 
 
@@ -24,6 +28,7 @@ namespace MultiPlayRPG
             }
         }
 
+        #region overrided metods
 
         public override void OnStartServer()
         {
@@ -141,6 +146,24 @@ namespace MultiPlayRPG
         }
 
         #endregion
+
+        #endregion
+
+
+        #region Methods
+
+        public void Login(string login, string pass)
+        {
+
+        }
+
+        public void Register(string login, string pass)
+        {
+
+        }
+
+        #endregion
+
 
     }
 }
