@@ -11,13 +11,15 @@ namespace MultiPlayRPG
         [SerializeField] protected UnitStats _stats;
 
         public delegate void UnitDenegate();
-        [SyncEvent] public event UnitDenegate EventOnDamage;
-        [SyncEvent] public event UnitDenegate EventOnDie;
-        [SyncEvent] public event UnitDenegate EventOnRevive;
+        public event UnitDenegate EventOnDamage;
+        public event UnitDenegate EventOnDie;
+        public event UnitDenegate EventOnRevive;
 
         protected Interactable _focus;
+        protected Collider _collider;
         protected bool _isAlive = true;
         protected bool _haveFocus;
+        protected bool _haveCollider;
 
         #endregion
 
@@ -30,6 +32,13 @@ namespace MultiPlayRPG
 
 
         #region UnityMethods
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _collider = GetComponent<Collider>();
+            _haveCollider = _collider != null;
+        }
 
         public override void OnStartServer()
         {
@@ -79,9 +88,13 @@ namespace MultiPlayRPG
         protected virtual void Die()
         {
             _isAlive = false;
+            if (_haveCollider)
+            {
+                _collider.enabled = false;
+            }
+            EventOnDie();
             if (isServer)
             {
-                EventOnDie();
                 _hasInteract = false;
                 _motor.MoveToPoint(transform.position);
                 RpcDie();
@@ -93,9 +106,14 @@ namespace MultiPlayRPG
         protected virtual void Revive()
         {
             _isAlive = true;
+            if (_haveCollider)
+            {
+                _collider.enabled = true;
+            }
+            EventOnRevive();
             if (isServer)
             {
-                EventOnRevive();
+
                 _hasInteract = true;
                 _stats.SetHealthRate(1);
                 RpcRevive();
