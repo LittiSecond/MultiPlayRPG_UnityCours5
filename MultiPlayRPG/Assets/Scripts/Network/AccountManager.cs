@@ -30,9 +30,14 @@ namespace MultiPlayRPG
 
         public static void RemoveAccount(UserAccount account) 
         {
-         
+            _accounts.Remove(account);
         }
-    
+
+        public static UserAccount GetAccount(NetworkConnection conn)
+        {
+            return _accounts.Find(acc => acc.Connection == conn);
+        }
+
         #endregion
 
     }

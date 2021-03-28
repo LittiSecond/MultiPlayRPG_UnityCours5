@@ -12,7 +12,7 @@ namespace MultiPlayRPG
 
         [SerializeField] private PlayerScriptsConnector _scriptsConnectorr;
 
-        [SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
+        //[SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
 
         #endregion
 
@@ -28,21 +28,21 @@ namespace MultiPlayRPG
         public override void OnStartAuthority()
         {
             //base.OnStartAuthority();
-            if (isServer)
-            {
-                CharacterOfPlr character = CreateCharacter();
-                //_controller.SetCharacter(character, true);
-                //character.SetInventory(_inventory);
-                //InventoryUI.Instance.SetInventory(_inventory);
-                Inventory inventory = GetComponent<Inventory>();
-                Equipment equipment = GetComponent<Equipment>();
-                _scriptsConnectorr.Setup(character, inventory, equipment, true);
-                _controller.SetCharacter(character, true);
-            }
-            else
-            {
+            //if (isServer)
+            //{
+            //    CharacterOfPlr character = CreateCharacter();
+            //    //_controller.SetCharacter(character, true);
+            //    //character.SetInventory(_inventory);
+            //    //InventoryUI.Instance.SetInventory(_inventory);
+            //    Inventory inventory = GetComponent<Inventory>();
+            //    Equipment equipment = GetComponent<Equipment>();
+            //    _scriptsConnectorr.Setup(character, inventory, equipment, true);
+            //    _controller.SetCharacter(character, true);
+            //}
+            //else
+            //{
                 CmdCreatePlayer();
-            }
+            //}
         }
 
         public override bool OnCheckObserver(NetworkConnection conn)
@@ -50,6 +50,16 @@ namespace MultiPlayRPG
             return false;
         }
 
+        private void OnDestroy()
+        {
+            if (isServer && _scriptsConnectorr.Character != null)
+            {
+                UserAccount acc = AccountManager.GetAccount(connectionToClient);
+                acc.Data.CharacterPos = _scriptsConnectorr.Character.transform.position;
+                Destroy(_scriptsConnectorr.Character.gameObject);
+                NetworkManager.singleton.StartCoroutine(acc.Quit());
+            }
+        }
 
         #endregion
 
@@ -63,32 +73,43 @@ namespace MultiPlayRPG
             //_controller.SetCharacter(unit.GetComponent<CharacterOfPlr>(), false);
             Inventory inventory = GetComponent<Inventory>();
             Equipment equipment = GetComponent<Equipment>();
-            _scriptsConnectorr.Setup(character, inventory, equipment, false);
-            _controller.SetCharacter(character, true);
+            _scriptsConnectorr.Setup(character, inventory, equipment, isLocalPlayer);
+            _controller.SetCharacter(character, isLocalPlayer);
         }
 
-        [ClientCallback]
-        private void HookUnitIdentity(NetworkIdentity unit)
-        {
-            if (isLocalPlayer)
-            {
-                _unitIdentity = unit;
-                CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
-                Equipment equipment = GetComponent<Equipment>();
-                Inventory inventory = GetComponent<Inventory>();
-                _scriptsConnectorr.Setup(character, inventory, equipment, true);
-                _controller.SetCharacter(character, true);
-                //character.SetInventory(_inventory);
-                //InventoryUI.Instance.SetInventory(_inventory);
-            }
-        }
+        //[ClientCallback]
+        //private void HookUnitIdentity(NetworkIdentity unit)
+        //{
+        //    if (isLocalPlayer)
+        //    {
+        //        _unitIdentity = unit;
+        //        CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
+        //        Equipment equipment = GetComponent<Equipment>();
+        //        Inventory inventory = GetComponent<Inventory>();
+        //        _scriptsConnectorr.Setup(character, inventory, equipment, true);
+        //        _controller.SetCharacter(character, true);
+        //        //character.SetInventory(_inventory);
+        //        //InventoryUI.Instance.SetInventory(_inventory);
+        //    }
+        //}
 
         private CharacterOfPlr CreateCharacter()
         {
-            GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
+            UserAccount acc = AccountManager.GetAccount(connectionToClient);
+
+            GameObject unit = Instantiate(_unitPrefab, acc.Data.CharacterPos, Quaternion.identity);
             NetworkServer.Spawn(unit);
-            _unitIdentity = unit.GetComponent<NetworkIdentity>();
+            //_unitIdentity = unit.GetComponent<NetworkIdentity>();
+            TargetLinkCharacter(connectionToClient, unit.GetComponent<NetworkIdentity>());
             return unit.GetComponent<CharacterOfPlr>();
+        }
+
+        [TargetRpc]
+        private void TargetLinkCharacter(NetworkConnection target, NetworkIdentity unit)
+        {
+            CharacterOfPlr character = unit.GetComponent<CharacterOfPlr>();
+            _scriptsConnectorr.Setup(character, GetComponent<Inventory>(), GetComponent<Equipment>(), true);
+            _controller.SetCharacter(character, true);
         }
 
         #endregion

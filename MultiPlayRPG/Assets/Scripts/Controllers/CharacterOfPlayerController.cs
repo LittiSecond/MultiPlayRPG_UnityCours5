@@ -63,13 +63,13 @@ namespace MultiPlayRPG
 
         }
 
-        private void OnDestroy()
-        {
-            if (_characterOfPlr != null)
-            {
-                Destroy(_characterOfPlr.gameObject);
-            }
-        }
+        //private void OnDestroy()
+        //{
+        //    if (_characterOfPlr != null)
+        //    {
+        //        Destroy(_characterOfPlr.gameObject);
+        //    }
+        //}
 
         #endregion
 
