@@ -38,8 +38,19 @@ namespace MultiPlayRPG
         private void Start()
         {
             _combatSystem = GetComponent<CombatSystem>();
-            _startPosition = transform.position;
+            _startPosition = Vector3.zero;
             _revievTime = _revievDelay;
+
+            if (Stats.CurrentHealth == 0)
+            {
+                transform.position = _startPosition;
+                if (isServer)
+                {
+                    Stats.SetHealthRate(1.0f);
+                    _motor.MoveToPoint(_startPosition);
+                }
+            }
+
         }
 
         private void Update()
