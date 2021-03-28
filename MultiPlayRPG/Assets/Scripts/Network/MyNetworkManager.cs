@@ -241,8 +241,11 @@ namespace MultiPlayRPG
 
         private IEnumerator LoginUser(NetworkMessage netMsg)
         {
-            UserMessage msg = netMsg.ReadMessage<UserMessage>();
-            IEnumerator e = DCF.Login(msg.Login, msg.Pass);
+            //UserMessage msg = netMsg.ReadMessage<UserMessage>();
+            //IEnumerator e = DCF.Login(msg.Login, msg.Pass);
+
+            UserAccount account = new UserAccount(netMsg.conn);
+            IEnumerator e = account.LoginTo(account.Login, account.Pass);
 
             while (e.MoveNext())
             {
