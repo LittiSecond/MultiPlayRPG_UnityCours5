@@ -57,6 +57,13 @@ namespace MultiPlayRPG
 
             if (GetComponent<NetworkIdentity>().isServer)
             {
+                UserAccount account = AccountManager.GetAccount(
+                    GetComponent<NetworkIdentity>().connectionToClient);
+                _character.Stats.Load(account.Data);
+                _progress.Load(account.Data);
+                _inventory.Load(account.Data);
+                _equipment.Load(account.Data);
+
                 _character.Stats.Manager = _statsManager;
                 _progress.Manager = _statsManager;
             }

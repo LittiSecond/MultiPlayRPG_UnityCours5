@@ -21,6 +21,24 @@ namespace MultiPlayRPG
         #endregion
 
 
+        #region Properties
+
+        public virtual int CurrentHealth
+        {
+            get
+            {
+                return _currentHealth;
+            }
+            protected set
+            {
+                _currentHealth = value;
+            }
+
+        }
+
+        #endregion
+
+
         #region UnityMethods
 
         public override void OnStartServer()
@@ -35,7 +53,7 @@ namespace MultiPlayRPG
 
         public void SetHealthRate(float rate)
         {
-            _currentHealth = rate == 0.0f ? 0 : (int)(_maxHealth / rate);
+            CurrentHealth = rate == 0.0f ? 0 : (int)(_maxHealth / rate);
         }
 
         #endregion
@@ -64,11 +82,11 @@ namespace MultiPlayRPG
                 return;
             }
 
-            _currentHealth -= amount;
+            CurrentHealth -= amount;
             EventOnDamage();
-            if (_currentHealth < 0)
+            if (CurrentHealth < 0)
             {
-                _currentHealth = 0;
+                CurrentHealth = 0;
             }
         }
         
@@ -79,7 +97,7 @@ namespace MultiPlayRPG
                 return;
             }
 
-            if (_currentHealth <= 0.0f)
+            if (CurrentHealth <= 0.0f)
             {
                 return;
             }
@@ -89,10 +107,10 @@ namespace MultiPlayRPG
                 return;
             }
 
-            _currentHealth += amount;
-            if (_currentHealth >= _maxHealth)
+            CurrentHealth += amount;
+            if (CurrentHealth >= _maxHealth)
             {
-                _currentHealth = _maxHealth;
+                CurrentHealth = _maxHealth;
             }
         }
 
