@@ -96,7 +96,17 @@ namespace MultiPlayRPG
             IEnumerator eLogin = DCF.Login(login, pass);
             while (eLogin.MoveNext())
             {
+                string s = eLogin.Current as string;
+                if (s != null)
+                {
+                    Debug.Log("UserAccount::LoginTo: eLogin.Current = " + s);
+                }
                 yield return eLogin.Current;
+            }
+            string s2 = eLogin.Current as string;
+            if (s2 != null)
+            {
+                Debug.Log("UserAccount::LoginTo: eLogin.Current = " + s2);
             }
             string response = eLogin.Current as string;
 
