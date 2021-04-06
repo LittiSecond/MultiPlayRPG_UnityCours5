@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace MultiPlayRPG
 {
@@ -10,6 +11,8 @@ namespace MultiPlayRPG
     {
 
         #region Fields
+
+        public NetworkHash128 CharacterHash = new NetworkHash128();
 
         public Vector3 CharacterPos;
         public List<int> Inventory = new List<int>();

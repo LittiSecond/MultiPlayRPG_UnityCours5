@@ -19,6 +19,7 @@ namespace MultiPlayRPG
         [SerializeField] private float _viewDistance = 5.0f;
         [SerializeField] private float _revievDelay = 5.0f;
         [SerializeField] private float _rewardExpa;
+        [SerializeField] private float _agroDistance = 5.0f;
         [SerializeField] private bool _aggressive;
 
         private List<CharacterOfPlr> _enemies = new List<CharacterOfPlr>();
@@ -95,7 +96,7 @@ namespace MultiPlayRPG
                 {
                     RemoveFocus();
                 }
-                else if (distance < _focus.Radius)
+                else if (distance < _interactDistance)
                 {
                     if ( !_focus.Interact(gameObject))
                     {
@@ -141,7 +142,7 @@ namespace MultiPlayRPG
 
         private void FindEnemy()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _viewDistance, _playerMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _agroDistance, _playerMask);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Interactable interactable = colliders[i].GetComponent<Interactable>();

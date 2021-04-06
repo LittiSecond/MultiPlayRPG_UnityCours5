@@ -7,8 +7,9 @@ namespace MultiPlayRPG
     {
         #region Fields
 
+        [SerializeField] private float _radius = 2.0f;
         public Transform InteractionTransform;
-        public float Radius = 2.0f;
+
 
         protected bool _hasInteract = true;
 
@@ -55,9 +56,13 @@ namespace MultiPlayRPG
         protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(InteractionTransform.position, Radius);
+            Gizmos.DrawWireSphere(InteractionTransform.position, _radius);
         }
 
+        public virtual float GetInteractDistance(GameObject luser)
+        {
+            return _radius;
+        }
 
         #endregion
 

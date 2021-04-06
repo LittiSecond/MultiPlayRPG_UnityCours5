@@ -17,6 +17,7 @@ namespace MultiPlayRPG
 
         protected Interactable _focus;
         protected Collider _collider;
+        protected float _interactDistance;
         protected bool _isAlive = true;
         protected bool _haveFocus;
         protected bool _haveCollider;
@@ -147,8 +148,9 @@ namespace MultiPlayRPG
             if (newFocus != _focus)
             {
                 _focus = newFocus;
-                _haveFocus = _focus != null; 
-                _motor.FollowTarget(newFocus);
+                _haveFocus = _focus != null;
+                _interactDistance = _focus.GetInteractDistance(gameObject);
+                _motor.FollowTarget(newFocus, _interactDistance);
             }
         }
 
@@ -176,6 +178,14 @@ namespace MultiPlayRPG
         protected virtual void DamageWithCombat(GameObject luser)
         {
             EventOnDamage?.Invoke();
+        }
+
+        public override float GetInteractDistance(GameObject luser)
+        {
+            CombatSystem combat = luser.GetComponent<CombatSystem>();
+            return base.GetInteractDistance(luser) + 
+                ( combat != null ? combat.AttackDistance : 0.0f);
+
         }
 
         #endregion
