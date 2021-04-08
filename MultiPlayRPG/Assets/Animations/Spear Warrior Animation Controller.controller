@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sword Warrior Animation Controller
+  m_Name: Spear Warrior Animation Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -284,7 +284,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3dd34cbfea0638644a75a040873caaaa, type: 3}
+  m_Motion: {fileID: 7400000, guid: b8bd7adb017ce8749ad411b53b5bf38e, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -312,7 +312,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c52633ad3251d4841878d77a31df9981, type: 3}
+  m_Motion: {fileID: 7400000, guid: d49af005f8f03dd40944d120d5009866, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -339,7 +339,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 797b4b83a521be345bf4f0ed61bd19a2, type: 3}
+  m_Motion: {fileID: 7400000, guid: 84015e646677f4f489536114019dcfcb, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
