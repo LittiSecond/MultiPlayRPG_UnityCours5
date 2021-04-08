@@ -9,7 +9,7 @@ namespace MultiPlayRPG
     {
         #region Fields
 
-        private static List<UserAccount> _accounts;
+        private static List<UserAccount> _accounts = new List<UserAccount>();
 
         #endregion
 
