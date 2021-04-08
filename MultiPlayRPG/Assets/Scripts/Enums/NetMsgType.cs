@@ -3,6 +3,7 @@
     public enum NetMsgType
     {
         Login,
-        Register
+        Register,
+        SelectCharacter
     }
 }
