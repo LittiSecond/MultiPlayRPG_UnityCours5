@@ -55,9 +55,7 @@ namespace MultiPlayRPG
 
         private CharacterOfPlr CreateCharacter()
         {
-            UserAccount acc = AccountManager.GetAccount(connectionToClient);
-
-            GameObject unit = Instantiate(_unitPrefab, acc.Data.CharacterPos, Quaternion.identity);
+            GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
             NetworkServer.Spawn(unit);
             TargetLinkCharacter(connectionToClient, unit.GetComponent<NetworkIdentity>());
             return unit.GetComponent<CharacterOfPlr>();
