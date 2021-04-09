@@ -17,6 +17,8 @@ namespace MultiPlayRPG
         [SerializeField] private StatsManager _statsManager;
         [SerializeField] private CharacterProgress _progress;
 
+        private NetworkConnection _connection;
+
         #endregion
 
 
@@ -26,6 +28,19 @@ namespace MultiPlayRPG
         public Inventory Inventoryy { get { return _inventory; } }
         public Equipment Equipmentt { get { return _equipment; } }
         public CharacterProgress Progress { get { return _progress; } }
+
+        public NetworkConnection Connection
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    _connection = GetComponent<NetworkIdentity>().connectionToClient;
+                }
+                return _connection;
+            }
+        }
+
         #endregion
 
 

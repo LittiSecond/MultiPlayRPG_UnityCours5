@@ -36,9 +36,9 @@ namespace MultiPlayRPG
                 StartServer();
                 NetworkServer.UnregisterHandler(MsgType.Connect);
                 NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnectCustom);
-                NetworkServer.RegisterHandler(MsgType.Highest + 
+                NetworkServer.RegisterHandler(MsgType.Highest + 1 +
                     (short)NetMsgType.Login, OnServerLogin);
-                NetworkServer.RegisterHandler(MsgType.Highest +
+                NetworkServer.RegisterHandler(MsgType.Highest + 1 +
                     (short)NetMsgType.Register, OnServerRegister);
                 serverRegisterHandler?.Invoke();
             }

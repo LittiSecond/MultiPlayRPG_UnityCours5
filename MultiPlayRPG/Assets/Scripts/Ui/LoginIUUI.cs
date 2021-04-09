@@ -19,7 +19,7 @@ namespace MultiPlayRPG
         [SerializeField] private InputField _registrPass;
         [SerializeField] private InputField _registrConfirm;
 
-        private MyNetworkManager _mgr;
+        private MyNetworkManager _netManager;
 
         #endregion
 
@@ -28,15 +28,15 @@ namespace MultiPlayRPG
 
         private void Start()
         {
-            _mgr = NetworkManager.singleton as MyNetworkManager;
-            if (_mgr.ServerMode )
+            _netManager = NetworkManager.singleton as MyNetworkManager;
+            if (_netManager.ServerMode )
             {
                 _loginPanel.SetActive(false);
             }
             else
             {
-                _mgr.loginResponseDelegate = LoginResponse;
-                _mgr.registerResponseDelegate = RegisterResponse;
+                _netManager.loginResponseDelegate = LoginResponse;
+                _netManager.registerResponseDelegate = RegisterResponse;
             }
         }
 
@@ -48,7 +48,7 @@ namespace MultiPlayRPG
         public void Login()
         {
             //NetworkManager.singleton.StartClient();
-            _mgr.Login(_loginLogin.text, _loginPass.text);
+            _netManager.Login(_loginLogin.text, _loginPass.text);
             _currentPanel.SetActive(false);
             _loadingPanel.SetActive(true);
         }
@@ -74,7 +74,7 @@ namespace MultiPlayRPG
         {
             if (_registrPass.text != string.Empty && _registrPass.text == _registrConfirm.text)
             {
-                _mgr.Register(_registrLogin.text, _registrPass.text);
+                _netManager.Register(_registrLogin.text, _registrPass.text);
                 _currentPanel.SetActive(false);
                 _loadingPanel.SetActive(true);
             }
