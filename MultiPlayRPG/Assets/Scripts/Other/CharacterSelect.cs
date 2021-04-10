@@ -57,8 +57,8 @@ namespace MultiPlayRPG
 
         private void OnOpenSelectUI(NetworkMessage netMsg)
         {
-            Debug.Log("CharacterSelect::OnOpenSelectUI: CharacterSelectUI.Instance.OpenPanel();");
-            //CharacterSelectUI.Instance.OpenPanel();
+            //Debug.Log("CharacterSelect::OnOpenSelectUI: CharacterSelectUI.Instance.OpenPanel();");
+            CharacterSelectUI.Instance.OpenPanel();
         }
 
         public void SelectCharacter(NetworkHash128 characterHash)

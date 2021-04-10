@@ -154,8 +154,6 @@ namespace MultiPlayRPG
                         (short)NetMsgType.Login, new StringMessage("CharacterNotSelect"));
                     netMsg.conn.Send(MsgType.Highest + 1 + 
                         (short)NetMsgType.SelectCharacter, new EmptyMessage());
-                    //netMsg.conn.Send(MsgType.Scene,
-                    //    new StringMessage(SceneManager.GetActiveScene().name));
                 }
             }
             else
