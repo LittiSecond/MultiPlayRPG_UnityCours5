@@ -28,6 +28,8 @@ namespace MultiPlayRPG
         #region Properties
 
         public UnitStats Stats { get => _stats; }
+        public Interactable Focus { get => _focus; }
+        public UnitMotor Motor { get => _motor; }
 
         #endregion
 
