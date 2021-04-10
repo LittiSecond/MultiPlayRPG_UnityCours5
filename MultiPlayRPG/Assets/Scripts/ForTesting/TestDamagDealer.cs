@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-namespace MultiPlayRPG
+namespace MultiPlayRPG.Testing
 {
     public sealed class TestDamagDealer : NetworkBehaviour
     {

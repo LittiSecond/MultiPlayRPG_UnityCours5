@@ -1948,6 +1948,7 @@ GameObject:
   - component: {fileID: 5898334578504255807}
   - component: {fileID: 8210322756088523701}
   - component: {fileID: 7144868094365893374}
+  - component: {fileID: 8741517411160115191}
   m_Layer: 10
   m_Name: CharacterOfPlayerHammer
   m_TagString: Untagged
@@ -2175,8 +2176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cded26f875f9580468a5616b2002186d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radius: 2
   InteractionTransform: {fileID: 8251842341188826038}
-  Radius: 2
   _motor: {fileID: 8251842341188826036}
   _stats: {fileID: 290569913625405369}
   _gfx: {fileID: 8251842341173973586}
@@ -2195,6 +2196,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.75
+  AttackDistance: 0
+--- !u!114 &8741517411160115191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251842341188825993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4bdefc1d1796a4287a3d210dbe3a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 10
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &3538881220554405549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2206,6 +2225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StatIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 740618451835936150, guid: 7b54502b11a7a0540bb8b95829002d74,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3097230494259664811, guid: 7b54502b11a7a0540bb8b95829002d74,
         type: 3}

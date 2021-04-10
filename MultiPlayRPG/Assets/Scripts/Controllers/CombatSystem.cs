@@ -9,14 +9,16 @@ namespace MultiPlayRPG
     {
         #region Fields
 
-        [SerializeField] float _attackSpeed = 1.0f;
+        [SerializeField] private float _attackSpeed = 1.0f;
+
+        public float AttackDistance = 0.0f;
 
         public delegate void CombatDenegate();
         [SyncEvent] public event CombatDenegate EventOnAttack;
 
-        float _attackCooldown = 0.0f;
+        private float _attackCooldown = 0.0f;
 
-        UnitStats _thisStats;
+        private UnitStats _thisStats;
 
         #endregion
 

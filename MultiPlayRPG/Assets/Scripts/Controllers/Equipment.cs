@@ -11,6 +11,8 @@ namespace MultiPlayRPG
         public SyncListItem Items = new SyncListItem();
         public PlayerScriptsConnector PlayerScriptsConnectorr;
 
+        private UserData _data;
+
         #endregion
 
 
@@ -40,6 +42,7 @@ namespace MultiPlayRPG
                 {
                     oldItem = (EquipmentItem)Items[i];
                     oldItem.UnEquip(PlayerScriptsConnectorr);
+                    _data.Equipment.Remove(ItemBase.GetItemID(Items[i]));
                     Items.RemoveAt(i);
                     break;
                 }
@@ -47,6 +50,7 @@ namespace MultiPlayRPG
 
             Items.Add(item);
             item.Equip(PlayerScriptsConnectorr);
+            _data.Equipment.Add(ItemBase.GetItemID(item));
 
             return oldItem;
         }
@@ -63,7 +67,19 @@ namespace MultiPlayRPG
                 PlayerScriptsConnectorr.Inventoryy.AddItem(Items[index]) )
             {
                 ((EquipmentItem)Items[index]).UnEquip(PlayerScriptsConnectorr);
+                _data.Equipment.Remove(ItemBase.GetItemID(Items[index]));
                 Items.RemoveAt(index);
+            }
+        }
+
+        public void Load(UserData data)
+        {
+            _data = data;
+            for (int i = 0; i < data.Equipment.Count; i++)
+            {
+                EquipmentItem item = (EquipmentItem)ItemBase.GetItem(data.Equipment[i]);
+                Items.Add(item);
+                item.Equip(PlayerScriptsConnectorr);
             }
         }
 
