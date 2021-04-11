@@ -15,6 +15,8 @@ namespace MultiPlayRPG
         public event UnitDenegate EventOnDie;
         public event UnitDenegate EventOnRevive;
 
+        public UnitSkills _unitSkills;
+
         protected Interactable _focus;
         protected Collider _collider;
         protected float _interactDistance;
@@ -145,7 +147,7 @@ namespace MultiPlayRPG
             }
         }
 
-        protected virtual void SetFocus( Interactable newFocus )
+        public virtual void SetFocus( Interactable newFocus )
         {
             if (newFocus != _focus)
             {
@@ -156,7 +158,7 @@ namespace MultiPlayRPG
             }
         }
 
-        protected virtual void RemoveFocus()
+        public virtual void RemoveFocus()
         {
             _focus = null;
             _haveFocus = false;
@@ -188,6 +190,20 @@ namespace MultiPlayRPG
             return base.GetInteractDistance(luser) + 
                 ( combat != null ? combat.AttackDistance : 0.0f);
 
+        }
+
+        public void UseSkill(int skillIndex)
+        {
+            if (_isAlive && skillIndex < _unitSkills.Count)
+            {
+                _unitSkills[skillIndex].Use(this);
+            }
+        }
+
+        public void TakeDamage(GameObject luser, int damage)
+        {
+            _stats.TakeDamag(damage);
+            DamageWithCombat(luser);
         }
 
         #endregion

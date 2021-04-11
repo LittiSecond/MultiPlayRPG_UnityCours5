@@ -157,23 +157,28 @@ namespace MultiPlayRPG
             }
         }
 
-        public override bool Interact(GameObject luser)
-        {
-            if (base.Interact(luser))
-            {
-                SetFocus(luser.GetComponent<Interactable>());
-                return true;
-            }
-            return false;
-        }
+        //public override bool Interact(GameObject luser)
+        //{
+        //    if (base.Interact(luser))
+        //    {
+        //        SetFocus(luser.GetComponent<Interactable>());
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         protected override void DamageWithCombat(GameObject luser)
         {
             base.DamageWithCombat(luser);
-            CharacterOfPlr character = luser.GetComponent<CharacterOfPlr>();
-            if (character != null && !_enemies.Contains(character))
+            Unit enemy = luser.GetComponent<Unit>();
+            if (enemy != null) 
             {
-                _enemies.Add(character);
+                SetFocus(enemy.GetComponent<Interactable>());
+                CharacterOfPlr character = enemy as CharacterOfPlr;
+                if (character != null && !_enemies.Contains(character))
+                {
+                    _enemies.Add(character);
+                }
             }
         }
 
@@ -195,8 +200,5 @@ namespace MultiPlayRPG
         }
 
         #endregion
-
-
-
     }
 }
