@@ -86,13 +86,14 @@ namespace MultiPlayRPG
                 {
                     cameraController.Target = characterOfPlr.transform;
                 }
+                SkillsPanelUI.Instance.SetSkills(_characterOfPlr.UnitSkills);
             }
         }
 
         [Command]
         public void CmdSetMovePoint(Vector3 point)
         {
-            if (!_characterOfPlr._unitSkills.InCast)
+            if (!_characterOfPlr.UnitSkills.InCast)
             {
                 _characterOfPlr.SetMovePoint(point);
             }
@@ -101,7 +102,7 @@ namespace MultiPlayRPG
         [Command]
         public void CmdSetFocus(NetworkIdentity newFocus)
         {
-            if (!_characterOfPlr._unitSkills.InCast)
+            if (!_characterOfPlr.UnitSkills.InCast)
             {
                 _characterOfPlr.SetNewFocus(newFocus.GetComponent<Interactable>());
             }
@@ -110,7 +111,7 @@ namespace MultiPlayRPG
         [Command]
         void CmdUseSkill(int skillIndex)
         {
-            if (!_characterOfPlr._unitSkills.InCast) _characterOfPlr.UseSkill(skillIndex);
+            if (!_characterOfPlr.UnitSkills.InCast) _characterOfPlr.UseSkill(skillIndex);
         }
 
         #endregion

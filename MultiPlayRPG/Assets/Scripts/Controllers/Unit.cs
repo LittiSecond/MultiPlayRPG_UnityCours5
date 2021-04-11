@@ -15,7 +15,7 @@ namespace MultiPlayRPG
         public event UnitDenegate EventOnDie;
         public event UnitDenegate EventOnRevive;
 
-        public UnitSkills _unitSkills;
+        public UnitSkills UnitSkills;
 
         protected Interactable _focus;
         protected Collider _collider;
@@ -194,9 +194,9 @@ namespace MultiPlayRPG
 
         public void UseSkill(int skillIndex)
         {
-            if (_isAlive && skillIndex < _unitSkills.Count)
+            if (_isAlive && skillIndex < UnitSkills.Count)
             {
-                _unitSkills[skillIndex].Use(this);
+                UnitSkills[skillIndex].Use(this);
             }
         }
 

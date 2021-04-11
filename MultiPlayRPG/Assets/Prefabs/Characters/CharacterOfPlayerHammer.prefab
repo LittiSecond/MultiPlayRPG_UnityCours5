@@ -11697,8 +11697,11 @@ MonoBehaviour:
   InteractionTransform: {fileID: 8251842341188826038}
   _motor: {fileID: 8251842341188826036}
   _stats: {fileID: 290569913625405369}
-  _unitSkills:
-    _skills: []
+  UnitSkills:
+    _skills:
+    - {fileID: 63514994173596068}
+    - {fileID: 4554231360507706275}
+    - {fileID: 6918782384116777122}
   _gfx: {fileID: 8251842341173973586}
   _revievDelay: 5
   PlayerScriptsConnectorr: {fileID: 0}
