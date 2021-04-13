@@ -17,6 +17,7 @@ namespace MultiPlayRPG
         public Vector3 CharacterPos;
         public List<int> Inventory = new List<int>();
         public List<int> Equipment = new List<int>();
+        public List<int> Skills = new List<int>();
 
         public float Expa;
         public float NextLevelExp;

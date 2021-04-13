@@ -3,14 +3,30 @@
 
 namespace MultiPlayRPG
 {
-    public class AurStrikeSkill : Skill
+    public class AurStrikeSkill : UpgradableSkill
     {
         #region Fields
+
+        private const int BASE_DAMAGE = 10;
 
         [SerializeField] private int _damage;
         [SerializeField] private float _radius;
         [SerializeField] private LayerMask _enemyMask;
         [SerializeField] private ParticleSystem _auraEffect;
+
+        #endregion
+
+
+        #region Properties
+
+        public override int Level 
+        {
+            set
+            {
+                base.Level = value;
+                _damage = BASE_DAMAGE + Level;
+            }
+        }
 
         #endregion
 

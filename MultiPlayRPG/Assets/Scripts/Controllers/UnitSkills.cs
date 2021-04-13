@@ -11,6 +11,8 @@ namespace MultiPlayRPG
 
         [SerializeField] private Skill[] _skills;
 
+        private UserData _data;
+
         #endregion
 
 
@@ -48,6 +50,36 @@ namespace MultiPlayRPG
                     }
                 }
                 return false;
+            }
+        }
+
+        public void Load(UserData data)
+        {
+            _data = data;
+            for (int i = 0; i < _skills.Length; i++)
+            {
+                UpgradableSkill skill = _skills[i] as UpgradableSkill;
+                if (i >= _data.Skills.Count)
+                {
+                    _data.Skills.Add(skill.Level);
+                }
+                else
+                {
+                    skill.Level = _data.Skills[i];
+                }
+                skill.OnSetLevel += ChangeLevel;
+            }
+        }
+
+        void ChangeLevel(UpgradableSkill skill, int newLevel)
+        {
+            for (int i = 0; i < _skills.Length; i++)
+            {
+                if (_skills[i] == skill)
+                {
+                    _data.Skills[i] = newLevel;
+                    break;
+                }
             }
         }
 

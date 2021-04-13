@@ -3,10 +3,33 @@
 
 namespace MultiPlayRPG
 {
-    public class HealOneselfSkill : Skill
+    public class HealOneselfSkill : UpgradableSkill
     {
+        #region Fields
+
+        private const int BASE_HEALING = 5;
+
         [SerializeField] private int _healAmount = 10;
         [SerializeField] private ParticleSystem _particle;
+
+        #endregion
+
+
+        #region Properties
+
+        public override int Level
+        {
+            set
+            {
+                base.Level = value;
+                _healAmount = BASE_HEALING + Level;
+            }
+        }
+
+        #endregion
+
+
+        #region Methods
 
         protected override void OnCastComplete()
         {
@@ -21,5 +44,6 @@ namespace MultiPlayRPG
             base.OnCastComplete();
         }
 
+        #endregion
     }
 }
