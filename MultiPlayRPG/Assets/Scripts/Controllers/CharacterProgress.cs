@@ -9,6 +9,7 @@ namespace MultiPlayRPG
 
         private const float EXPERIENCE_STEP = 100.0f;
         private const int STAT_POINTS_PER_LEVEL = 3;
+        private const int SKILL_POINTS_PER_LEVEL = 1;
 
         private StatsManager _manager;
         private UserData _data;
@@ -17,6 +18,7 @@ namespace MultiPlayRPG
         private float _nextLevelExp;
         private int _level;
         private int _statPoints;
+        private int _skillPoints;
 
         #endregion
 
@@ -32,6 +34,7 @@ namespace MultiPlayRPG
                 _manager.NextLevelExp = _nextLevelExp;
                 _manager.Level = _level;
                 _manager.StatPoints = _statPoints;
+                _manager.SkillPoints = _skillPoints;
             }
         }
 
@@ -54,6 +57,7 @@ namespace MultiPlayRPG
                 _manager.NextLevelExp = _nextLevelExp;
                 _manager.Level = _level;
                 _manager.StatPoints = _statPoints;
+                _manager.SkillPoints = _skillPoints;
             }
         }
 
@@ -62,6 +66,7 @@ namespace MultiPlayRPG
             _data.Level = ++_level;
             _data.NextLevelExp = _nextLevelExp += EXPERIENCE_STEP;
             _data.StatPoints = _statPoints += STAT_POINTS_PER_LEVEL;
+            _data.SkillPoints = _skillPoints += SKILL_POINTS_PER_LEVEL;
         }
 
         public bool RemoveStatPoint()
@@ -86,11 +91,26 @@ namespace MultiPlayRPG
                 _level = data.Level;
             }
             _statPoints = data.StatPoints;
+            _skillPoints = data.SkillPoints;
             _expa = data.Expa;
             if (data.NextLevelExp > 0)
             {
                 _nextLevelExp = data.NextLevelExp;
             }
+        }
+
+        public bool RemoveSkillPoint()
+        {
+            if (_skillPoints > 0)
+            {
+                _data.SkillPoints = --_skillPoints;
+                if (_manager != null)
+                {
+                    _manager.SkillPoints = _skillPoints;
+                }
+                return true;
+            }
+            return false;
         }
 
         #endregion

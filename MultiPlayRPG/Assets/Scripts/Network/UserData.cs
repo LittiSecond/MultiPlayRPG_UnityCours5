@@ -27,6 +27,7 @@ namespace MultiPlayRPG
         public int StatDamage;
         public int StatArmor;
         public int StatMoveSpeed;
+        public int SkillPoints;
 
         #endregion
 
