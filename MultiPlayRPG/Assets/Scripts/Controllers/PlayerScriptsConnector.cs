@@ -68,6 +68,9 @@ namespace MultiPlayRPG
                 InventoryUI.Instance.SetInventory(_inventory);
                 EquipmentUI.Instance.SetEquipment(_equipment);
                 StatsUI.Instance.SetManager(_statsManager);
+                SkillsPanelUI.Instance.SetSkills(_character.UnitSkills);
+                SkillsViewUI.Instance.SetCharacter(_character);
+                SkillsViewUI.Instance.SetManager(_statsManager);
             }
 
             if (GetComponent<NetworkIdentity>().isServer)
@@ -75,6 +78,7 @@ namespace MultiPlayRPG
                 UserAccount account = AccountManager.GetAccount(
                     GetComponent<NetworkIdentity>().connectionToClient);
                 _character.Stats.Load(account.Data);
+                _character.UnitSkills.Load(account.Data);
                 _progress.Load(account.Data);
                 _inventory.Load(account.Data);
                 _equipment.Load(account.Data);
