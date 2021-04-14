@@ -1949,6 +1949,7 @@ GameObject:
   - component: {fileID: 8210322756088523701}
   - component: {fileID: 7144868094365893374}
   - component: {fileID: 7527762597518239118}
+  - component: {fileID: 2218759840734761517}
   m_Layer: 10
   m_Name: CharacterOfPlayerCrossbow
   m_TagString: Untagged
@@ -2180,6 +2181,8 @@ MonoBehaviour:
   InteractionTransform: {fileID: 8251842341188826038}
   _motor: {fileID: 8251842341188826036}
   _stats: {fileID: 290569913625405369}
+  UnitSkills:
+    _skills: []
   _gfx: {fileID: 8251842341173973586}
   _revievDelay: 5
   PlayerScriptsConnectorr: {fileID: 0}
@@ -2214,6 +2217,19 @@ MonoBehaviour:
   _visMask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &2218759840734761517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251842341188825993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5db7f2973d86e488fe69b13775efba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChannelName: Local
 --- !u!1001 &3538881220554405549
 PrefabInstance:
   m_ObjectHideFlags: 0

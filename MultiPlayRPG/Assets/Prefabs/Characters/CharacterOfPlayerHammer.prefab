@@ -11466,6 +11466,7 @@ GameObject:
   - component: {fileID: 63514994173596068}
   - component: {fileID: 4554231360507706275}
   - component: {fileID: 6918782384116777122}
+  - component: {fileID: 8755819044688356768}
   m_Layer: 10
   m_Name: CharacterOfPlayerHammer
   m_TagString: Untagged
@@ -11796,6 +11797,19 @@ MonoBehaviour:
   CooldownDelay: 0
   _healAmount: 17
   _particle: {fileID: 9128934948927697254}
+--- !u!114 &8755819044688356768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251842341188825993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5db7f2973d86e488fe69b13775efba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChannelName: Local
 --- !u!1001 &3538881220554405549
 PrefabInstance:
   m_ObjectHideFlags: 0
