@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace MultiPlayRPG
 {
@@ -39,7 +39,8 @@ namespace MultiPlayRPG
 
         private void Update()
         {
-            if (Input.GetButtonDown("Inventory"))
+            if (Input.GetButtonDown("Inventory") 
+                && EventSystem.current.currentSelectedGameObject == null )
             {
                 _inventoryUI.SetActive(!_inventoryUI.activeSelf);
             }

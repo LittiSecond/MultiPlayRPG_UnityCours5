@@ -1139,7 +1139,7 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  ServerMode: 1
+  ServerMode: 0
 --- !u!4 &510722630
 Transform:
   m_ObjectHideFlags: 0

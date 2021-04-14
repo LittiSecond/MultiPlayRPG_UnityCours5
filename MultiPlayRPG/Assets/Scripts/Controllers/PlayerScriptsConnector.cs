@@ -71,6 +71,21 @@ namespace MultiPlayRPG
                 SkillsPanelUI.Instance.SetSkills(_character.UnitSkills);
                 SkillsViewUI.Instance.SetCharacter(_character);
                 SkillsViewUI.Instance.SetManager(_statsManager);
+
+                PlayerChat playerChat = GetComponent<PlayerChat>();
+                if (playerChat != null)
+                {
+                    if (GlobalChatChannel.Instance != null)
+                    {
+                        playerChat.RegisterChannel(GlobalChatChannel.Instance);
+                    }
+                    ChatChannel localChannel = _character.GetComponent<ChatChannel>();
+                    if (localChannel != null)
+                    {
+                        playerChat.RegisterChannel(localChannel);
+                    }
+                    ChatUI.Instance.SetPlayerChat(playerChat);
+                }
             }
 
             if (GetComponent<NetworkIdentity>().isServer)
