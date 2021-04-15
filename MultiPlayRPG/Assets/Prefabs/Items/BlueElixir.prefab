@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3244102755622518254}
   - component: {fileID: 6783631586832629621}
   - component: {fileID: 7207021980683206921}
+  - component: {fileID: 7114038240471383055}
   m_Layer: 12
   m_Name: BlueElixir
   m_TagString: Untagged
@@ -115,10 +116,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5178e5404eae1f743876bac091de7e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radius: 2
   InteractionTransform: {fileID: 595990139944119714}
-  Radius: 0.5
   ItemScriptableObject: {fileID: 11400000, guid: edf19ca0e836f804ab34526b5b82e7cd,
     type: 2}
+  LiveTime: 10
+--- !u!114 &7114038240471383055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595990139944119772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4bdefc1d1796a4287a3d210dbe3a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 10
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &3021918507866685656
 GameObject:
   m_ObjectHideFlags: 0

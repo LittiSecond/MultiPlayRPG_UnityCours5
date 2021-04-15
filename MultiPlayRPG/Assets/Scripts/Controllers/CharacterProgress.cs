@@ -11,6 +11,7 @@ namespace MultiPlayRPG
         private const int STAT_POINTS_PER_LEVEL = 3;
 
         private StatsManager _manager;
+        private UserData _data;
 
         private float _expa;
         private float _nextLevelExp;
@@ -41,10 +42,10 @@ namespace MultiPlayRPG
 
         public void AddExp(float addExpa)
         {
-            _expa += addExpa;
+            _data.Expa =  _expa += addExpa;
             while (_expa >= _nextLevelExp)
             {
-                _expa -= _nextLevelExp;
+                _data.Expa = _expa -= _nextLevelExp;
                 LevelUp();
             }
             if (_manager != null)
@@ -58,16 +59,16 @@ namespace MultiPlayRPG
 
         private void LevelUp()
         {
-            _level++;
-            _nextLevelExp += EXPERIENCE_STEP;
-            _statPoints += STAT_POINTS_PER_LEVEL;
+            _data.Level = ++_level;
+            _data.NextLevelExp = _nextLevelExp += EXPERIENCE_STEP;
+            _data.StatPoints = _statPoints += STAT_POINTS_PER_LEVEL;
         }
 
         public bool RemoveStatPoint()
         {
             if (_statPoints > 0)
             {
-                _statPoints--;
+                _data.StatPoints = --_statPoints;
                 if (_manager != null)
                 {
                     _manager.StatPoints = _statPoints;
@@ -75,6 +76,21 @@ namespace MultiPlayRPG
                 return true;
             }
             return false;
+        }
+
+        public void Load(UserData data)
+        {
+            _data = data;
+            if (data.Level > 0)
+            {
+                _level = data.Level;
+            }
+            _statPoints = data.StatPoints;
+            _expa = data.Expa;
+            if (data.NextLevelExp > 0)
+            {
+                _nextLevelExp = data.NextLevelExp;
+            }
         }
 
         #endregion
