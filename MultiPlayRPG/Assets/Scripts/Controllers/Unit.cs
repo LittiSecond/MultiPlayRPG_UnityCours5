@@ -11,13 +11,18 @@ namespace MultiPlayRPG
         [SerializeField] protected UnitStats _stats;
 
         public delegate void UnitDenegate();
-        [SyncEvent] public event UnitDenegate EventOnDamage;
-        [SyncEvent] public event UnitDenegate EventOnDie;
-        [SyncEvent] public event UnitDenegate EventOnRevive;
+        public event UnitDenegate EventOnDamage;
+        public event UnitDenegate EventOnDie;
+        public event UnitDenegate EventOnRevive;
+
+        public UnitSkills UnitSkills;
 
         protected Interactable _focus;
+        protected Collider _collider;
+        protected float _interactDistance;
         protected bool _isAlive = true;
         protected bool _haveFocus;
+        protected bool _haveCollider;
 
         #endregion
 
@@ -25,11 +30,20 @@ namespace MultiPlayRPG
         #region Properties
 
         public UnitStats Stats { get => _stats; }
+        public Interactable Focus { get => _focus; }
+        public UnitMotor Motor { get => _motor; }
 
         #endregion
 
 
         #region UnityMethods
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _collider = GetComponent<Collider>();
+            _haveCollider = _collider != null;
+        }
 
         public override void OnStartServer()
         {
@@ -79,9 +93,13 @@ namespace MultiPlayRPG
         protected virtual void Die()
         {
             _isAlive = false;
+            if (_haveCollider)
+            {
+                _collider.enabled = false;
+            }
+            EventOnDie();
             if (isServer)
             {
-                EventOnDie();
                 _hasInteract = false;
                 _motor.MoveToPoint(transform.position);
                 RpcDie();
@@ -93,9 +111,14 @@ namespace MultiPlayRPG
         protected virtual void Revive()
         {
             _isAlive = true;
+            if (_haveCollider)
+            {
+                _collider.enabled = true;
+            }
+            EventOnRevive();
             if (isServer)
             {
-                EventOnRevive();
+
                 _hasInteract = true;
                 _stats.SetHealthRate(1);
                 RpcRevive();
@@ -124,17 +147,18 @@ namespace MultiPlayRPG
             }
         }
 
-        protected virtual void SetFocus( Interactable newFocus )
+        public virtual void SetFocus( Interactable newFocus )
         {
             if (newFocus != _focus)
             {
                 _focus = newFocus;
-                _haveFocus = _focus != null; 
-                _motor.FollowTarget(newFocus);
+                _haveFocus = _focus != null;
+                _interactDistance = _focus.GetInteractDistance(gameObject);
+                _motor.FollowTarget(newFocus, _interactDistance);
             }
         }
 
-        protected virtual void RemoveFocus()
+        public virtual void RemoveFocus()
         {
             _focus = null;
             _haveFocus = false;
@@ -158,6 +182,28 @@ namespace MultiPlayRPG
         protected virtual void DamageWithCombat(GameObject luser)
         {
             EventOnDamage?.Invoke();
+        }
+
+        public override float GetInteractDistance(GameObject luser)
+        {
+            CombatSystem combat = luser.GetComponent<CombatSystem>();
+            return base.GetInteractDistance(luser) + 
+                ( combat != null ? combat.AttackDistance : 0.0f);
+
+        }
+
+        public void UseSkill(int skillIndex)
+        {
+            if (_isAlive && skillIndex < UnitSkills.Count)
+            {
+                UnitSkills[skillIndex].Use(this);
+            }
+        }
+
+        public void TakeDamage(GameObject luser, int damage)
+        {
+            _stats.TakeDamag(damage);
+            DamageWithCombat(luser);
         }
 
         #endregion

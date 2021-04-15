@@ -19,6 +19,7 @@ namespace MultiPlayRPG
         [SerializeField] private float _viewDistance = 5.0f;
         [SerializeField] private float _revievDelay = 5.0f;
         [SerializeField] private float _rewardExpa;
+        [SerializeField] private float _agroDistance = 5.0f;
         [SerializeField] private bool _aggressive;
 
         private List<CharacterOfPlr> _enemies = new List<CharacterOfPlr>();
@@ -95,7 +96,7 @@ namespace MultiPlayRPG
                 {
                     RemoveFocus();
                 }
-                else if (distance < _focus.Radius)
+                else if (distance < _interactDistance)
                 {
                     if ( !_focus.Interact(gameObject))
                     {
@@ -141,7 +142,7 @@ namespace MultiPlayRPG
 
         private void FindEnemy()
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, _viewDistance, _playerMask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, _agroDistance, _playerMask);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Interactable interactable = colliders[i].GetComponent<Interactable>();
@@ -156,23 +157,28 @@ namespace MultiPlayRPG
             }
         }
 
-        public override bool Interact(GameObject luser)
-        {
-            if (base.Interact(luser))
-            {
-                SetFocus(luser.GetComponent<Interactable>());
-                return true;
-            }
-            return false;
-        }
+        //public override bool Interact(GameObject luser)
+        //{
+        //    if (base.Interact(luser))
+        //    {
+        //        SetFocus(luser.GetComponent<Interactable>());
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         protected override void DamageWithCombat(GameObject luser)
         {
             base.DamageWithCombat(luser);
-            CharacterOfPlr character = luser.GetComponent<CharacterOfPlr>();
-            if (character != null && !_enemies.Contains(character))
+            Unit enemy = luser.GetComponent<Unit>();
+            if (enemy != null) 
             {
-                _enemies.Add(character);
+                SetFocus(enemy.GetComponent<Interactable>());
+                CharacterOfPlr character = enemy as CharacterOfPlr;
+                if (character != null && !_enemies.Contains(character))
+                {
+                    _enemies.Add(character);
+                }
             }
         }
 
@@ -194,8 +200,5 @@ namespace MultiPlayRPG
         }
 
         #endregion
-
-
-
     }
 }

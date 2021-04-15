@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.EventSystems;
 
 
 namespace MultiPlayRPG
@@ -34,41 +35,43 @@ namespace MultiPlayRPG
             {
                 if (_characterOfPlr != null)
                 {
-                    if (Input.GetMouseButtonDown(1))
+                    if (!EventSystem.current.IsPointerOverGameObject())
                     {
-                        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-
-                        if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _movementMask))
+                        if (Input.GetMouseButtonDown(1))
                         {
-                           CmdSetMovePoint(hit.point);
-                        }
-                    }
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
+                            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                            RaycastHit hit;
 
-                        if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _interactMask))
-                        {
-                            Interactable interactable = hit.collider.GetComponent<Interactable>();
-                            if (interactable != null)
+                            if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _movementMask))
                             {
-                                CmdSetFocus(interactable.GetComponent<NetworkIdentity>());
+                                CmdSetMovePoint(hit.point);
                             }
                         }
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+                            RaycastHit hit;
+
+                            if (Physics.Raycast(ray, out hit, RAY_CAST_DISTANCE, _interactMask))
+                            {
+                                Interactable interactable = hit.collider.GetComponent<Interactable>();
+                                if (interactable != null)
+                                {
+                                    CmdSetFocus(interactable.GetComponent<NetworkIdentity>());
+                                }
+                            }
+                        }
+                    }
+
+                    if (EventSystem.current.currentSelectedGameObject == null)
+                    {
+                        if (Input.GetButtonDown("Skill1")) CmdUseSkill(0);
+                        if (Input.GetButtonDown("Skill2")) CmdUseSkill(1);
+                        if (Input.GetButtonDown("Skill3")) CmdUseSkill(2);
                     }
                 }
             }
 
-        }
-
-        private void OnDestroy()
-        {
-            if (_characterOfPlr != null)
-            {
-                Destroy(_characterOfPlr.gameObject);
-            }
         }
 
         #endregion
@@ -86,19 +89,32 @@ namespace MultiPlayRPG
                 {
                     cameraController.Target = characterOfPlr.transform;
                 }
+                SkillsPanelUI.Instance.SetSkills(_characterOfPlr.UnitSkills);
             }
         }
 
         [Command]
         public void CmdSetMovePoint(Vector3 point)
         {
-            _characterOfPlr.SetMovePoint(point);
+            if (!_characterOfPlr.UnitSkills.InCast)
+            {
+                _characterOfPlr.SetMovePoint(point);
+            }
         }
 
         [Command]
         public void CmdSetFocus(NetworkIdentity newFocus)
         {
-            _characterOfPlr.SetNewFocus(newFocus.GetComponent<Interactable>());
+            if (!_characterOfPlr.UnitSkills.InCast)
+            {
+                _characterOfPlr.SetNewFocus(newFocus.GetComponent<Interactable>());
+            }
+        }
+
+        [Command]
+        void CmdUseSkill(int skillIndex)
+        {
+            if (!_characterOfPlr.UnitSkills.InCast) _characterOfPlr.UseSkill(skillIndex);
         }
 
         #endregion

@@ -14,22 +14,8 @@ namespace MultiPlayRPG
         [SyncVar] public int MoveSpeed;
         [SyncVar] public int Level;
         [SyncVar] public int StatPoints;
+        [SyncVar] public int SkillPoints;
         public PlayerScriptsConnector Player;
-
-        #endregion
-
-
-        #region Properties
-
-        #endregion
-
-
-        #region ClassLifeCycles
-
-        #endregion
-
-
-        #region UnityMethods
 
         #endregion
 
@@ -52,6 +38,19 @@ namespace MultiPlayRPG
                     case (int)StatType.MoveSpeed:
                         Player.Character.Stats.MoveSpeed.BaseValue++;
                         break;
+                }
+            }
+        }
+
+        [Command]
+        public void CmdUpgradeSkill(int index)
+        {
+            if (Player.Progress.RemoveSkillPoint())
+            {
+                UpgradableSkill skill = Player.Character.UnitSkills[index] as UpgradableSkill;
+                if (skill != null)
+                {
+                    skill.Level++;
                 }
             }
         }
