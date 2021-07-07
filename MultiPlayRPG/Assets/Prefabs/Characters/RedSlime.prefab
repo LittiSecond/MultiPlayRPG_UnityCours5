@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 3504045051642462107}
   - component: {fileID: 4160555592272193076}
   - component: {fileID: 6782591320730367161}
+  - component: {fileID: 5253593529246947616}
   m_Layer: 11
   m_Name: RedSlime
   m_TagString: Untagged
@@ -256,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07d8a603594d76469913fa547c2a187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _radius: 2
   InteractionTransform: {fileID: 4885079432260988}
-  Radius: 2
   _motor: {fileID: 8121976879930958776}
   _stats: {fileID: 6280061534457168051}
   _moveRadius: 10
@@ -266,6 +267,7 @@ MonoBehaviour:
   _viewDistance: 5
   _revievDelay: 5
   _rewardExpa: 76
+  _agroDistance: 5
   _aggressive: 0
 --- !u!114 &1680219205582239754
 MonoBehaviour:
@@ -308,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.6
+  AttackDistance: 0
 --- !u!114 &3504045051642462107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +356,23 @@ MonoBehaviour:
     Rate: 69.1
   - Item: {fileID: 11400000, guid: ede8152d2fb3ade46a3a464885a9f7ac, type: 2}
     Rate: 22.3
+--- !u!114 &5253593529246947616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090219386143568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4bdefc1d1796a4287a3d210dbe3a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 10
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1159745215084782
 GameObject:
   m_ObjectHideFlags: 0

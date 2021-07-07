@@ -10,6 +10,8 @@ namespace MultiPlayRPG
 
         public event SyncList<Item>.SyncListChanged OnItemChanged;
 
+        private UserData _data;
+
         //public Transform DropPoint;
         public PlayerScriptsConnector PlayerScriptsConnectorr;
         public SyncListItem Items = new SyncListItem();
@@ -37,6 +39,7 @@ namespace MultiPlayRPG
             if (Items.Count < Space)
             {
                 Items.Add(item);
+                _data.Inventory.Add(ItemBase.GetItemID(item));
                 return true;
             }
             else
@@ -57,7 +60,7 @@ namespace MultiPlayRPG
             if (Items[index] != null)
             {
                 Drop(Items[index]);
-                Items.RemoveAt(index);
+                RemoveItem(Items[index]);
             }
         }
 
@@ -93,8 +96,17 @@ namespace MultiPlayRPG
         public void RemoveItem(Item item)
         {
             Items.Remove(item);
+            _data.Inventory.Remove(ItemBase.GetItemID(item) );
         }
 
+        public void Load(UserData data)
+        {
+            _data = data;
+            for (int i = 0; i < data.Inventory.Count; i++)
+            {
+                Items.Add(ItemBase.GetItem(data.Inventory[i]));
+            }
+        }
 
         #endregion
     }
